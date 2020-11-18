@@ -19,31 +19,31 @@ Use the scripts as follow:
 
 Delete hiden newline characters
 
-$ perl script-0-replace_Mc.pl gisaid_hcov-19_Mex.fasta
+$ perl replacemc.pl gisaid_hcov-19_Mex.fasta
 
 $ mv gisaid_hcov-19_Mex.fasta.e1 gisaid_hcov-19_Mex.e1.fasta
 
 Get fasta sequences represented in the latest global Nextstrain analysis
 
-$ perl extraencov.pl nextstrain_ncov_global_metadata.tsv sequences.fasta
+$ perl extractncov.pl nextstrain_ncov_global_metadata.tsv sequences.fasta
 
 $ mv outfile.fasta nextstrain_ncov_global_metadata.fasta
 
 Get metadata associated to the latest global Nextstrain analysis
 
-$ perl damemetadatos.pl nextstrain_ncov_global_metadata.fasta metadata.tsv
+$ perl extractmetadata.pl nextstrain_ncov_global_metadata.fasta metadata.tsv
 
 $ mv outfile nextstrain_ncov_global_metadata.f.tsv
 
 Create a file with the IDs of the sequences from Mexico that are in the latest global Nextstrain analysis
 
-$ perl estudiametadata.pl nextstrain_ncov_global_metadata.f.tsv 17 Mexico
+$ perl extractids.pl nextstrain_ncov_global_metadata.f.tsv 17 Mexico
 
 $ mv outfile ncov_Mex_IDs.txt
 
 Create the fasta and metadata files of those sequences in gisaid_hcov-19_Mex.fasta 
 
-$ perl agregasecMex.pl ncov_Mex_IDs.txt gisaid_hcov-19_Mex.e1.fasta sequences.fasta metadata.tsv 
+$ perl createfiles.pl ncov_Mex_IDs.txt gisaid_hcov-19_Mex.e1.fasta sequences.fasta metadata.tsv 
 
 Concatenate the files 
 
