@@ -13,7 +13,7 @@ sequences.fasta # fasta genome sequences from GISAID formated for Nextstrain
 
 metadata.tsv # metadata from GISAID formatted for Nextstrain
 
-gisaid_hcov-19_Mex.fasta # fasta genome sequences downloaded from GISAID
+gisaid_hcov-19_Mex.fasta # selected fasta genome sequences downloaded from GISAID
 
 Use the scripts as follow:
 
@@ -21,23 +21,23 @@ Delete hiden newline characters
 
 $ perl script-0-replace_Mc.pl gisaid_hcov-19_Mex.fasta
 
-$ mv gisaid_hcov-19_2020_11_16_01_Mex.fasta.e1 gisaid_hcov-19_Mex.e1.fasta
+$ mv gisaid_hcov-19_Mex.fasta.e1 gisaid_hcov-19_Mex.e1.fasta
 
-Get fasta sequences of those sequences included in the latest global analysis from Nextstrain
+Get fasta sequences represented in the latest global Nextstrain analysis
 
 $ perl extraencov.pl nextstrain_ncov_global_metadata.tsv sequences.fasta
 
 $ mv outfile.fasta nextstrain_ncov_global_metadata.fasta
 
-Get metadata of those sequences included in the latest global analysis from Nextstrain
+Get metadata associated to the latest global Nextstrain analysis
 
 $ perl damemetadatos.pl nextstrain_ncov_global_metadata.fasta metadata.tsv
 
 $ mv outfile nextstrain_ncov_global_metadata.f.tsv
 
-Create a file with the IDs of the sequences from Mexico that are in the latest global analysis from Nextstrain
+Create a file with the IDs of the sequences from Mexico that are in the latest global Nextstrain analysis
 
-$ perl estudiametadata.pl nextstrain_ncov_global_metadata-201112.f.tsv 17 Mexico
+$ perl estudiametadata.pl nextstrain_ncov_global_metadata.f.tsv 17 Mexico
 
 $ mv outfile ncov_Mex_IDs.txt
 
