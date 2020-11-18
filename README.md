@@ -8,8 +8,11 @@ First collect the data. Go to the latest global analysis provided by Nextstrain 
 Suppose that you downloaded the following files:
 
 nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
+
 sequences.fasta # fasta genome sequences from GISAID formated for Nextstrain
+
 metadata.tsv # metadata from GISAID formatted for Nextstrain
+
 gisaid_hcov-19_Mex.fasta # fasta genome sequences downloaded from GISAID
 
 Use the scripts as follow:
