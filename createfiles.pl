@@ -199,10 +199,10 @@ for (my $i = 0; $i <= $#keys; $i++){
 #print ("numero de secuencias faltantes en nextstrain que no encontro en GISAID (procesado).: $nF\n");
 #print ("\nNota: es necesario esperar a que Nextstrain procese las $nF secuencias de GISAID.\n");
 
-print ("Selected sequences in Nextstrain.......................................: $ns\n");
-print ("Selected sequences in GISAID (unprocessed)............................: $ng\n");
-print ("Selected sequences in GISAID (unprocessed) lacking in Nextstrain.: $nf\n");
-print ("Lacking selected sequences in Nextstrain found in GISAID (processed)....: $m\n");
+print ("Selected sequences in Nextstrain.........................................: $ns\n");
+print ("Selected sequences in GISAID (unprocessed)...............................: $ng\n");
+print ("Selected sequences in GISAID (unprocessed) lacking in Nextstrain.........: $nf\n");
+print ("Lacking selected sequences in Nextstrain found in GISAID (processed).....: $m\n");
 print ("Lacking selected sequences in Nextstrain not found in GISAID (processed).: $nF\n");
 
 print ("-----\n");
