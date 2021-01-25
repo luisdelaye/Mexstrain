@@ -53,7 +53,7 @@ print ("-----\n");
 my $ng = 0;
 #print ("Secuencias de GISAID (sin procesar) que son de Mexico\n");
 #print ("(no todas estas secuencias han sido procesadas para Nextstrain necesariamente)\n");
-print ("Sequences from GISAID (unprocessed)\n");
+print ("Sequences from GISAID\n");
 print ("file: $fileGS\n");
 open (MIA, "$fileGS") or die ("Can't open file $fileGS\n");
 while (my $linea = <MIA>){
@@ -80,7 +80,7 @@ print ("-----\n");
 my $nf = 0;
 #print ("Secuencias mexicanas de GISAID (sin procesar) que no estan en el analisis de filodinamica de Nextstrain\n");
 #print ("(son las que tengo que buscar en el archivo $fileSe)\n");
-print ("Sequences from GISAID (unprocessed) lacking in Nextstrain\n");
+print ("Sequences from GISAID lacking in Nextstrain\n");
 my @kgisaid = sort keys (%gisaid);
 for (my $i = 0; $i <= $#kgisaid; $i++){
 	if ($gisaid{$kgisaid[$i]} == 0){
@@ -91,7 +91,7 @@ for (my $i = 0; $i <= $#kgisaid; $i++){
 print ("-----\n");
 
 #-----------------------------------------------------------------------------------------
-# Ahora extraigo las secuencias que faltan de sequences.fasta
+# Ahora extraigo de sequences.fasta, las secuencias de GISAID que no estan en Nextstrain
 
 my $r = 0;
 my $sec;
@@ -152,7 +152,7 @@ close (MIA);
 my $nF = 0;
 #print ("Secuencias mexicanas de GISAID (sin procesar) que aun no han sido procesadas para Nextstrain\n");
 #print ("(tendria que descargarlas manualmente de GISAID junto con sus metadatos)\n");
-print ("Sequences from GISAID (unprocessed)\n");
+print ("Sequences from GISAID not yet included in Nextstrain\n");
 for (my $i = 0; $i <= $#kgisaid; $i++){
 	if ($gisaid{$kgisaid[$i]} == 0){
 		print ("$kgisaid[$i]\t$gisaid{$kgisaid[$i]}\n");
@@ -192,18 +192,18 @@ for (my $i = 0; $i <= $#keys; $i++){
 #-----------------------------------------------------------------------------------------
 # Ahora hago un reporte
 
-#print ("numero de secuencias mexicanas en nextstrain.......................................: $ns\n");
-#print ("numero de secuencias mexicanas en GISAID (sin procesar)............................: $ng\n");
-#print ("numero de secuencias que estan en GISAID (sin procesar) y que faltan en nextstrain.: $nf\n");
-#print ("numero de secuencias faltantes en nextstrain que encontro en GISAID (procesado)....: $m\n");
-#print ("numero de secuencias faltantes en nextstrain que no encontro en GISAID (procesado).: $nF\n");
-#print ("\nNota: es necesario esperar a que Nextstrain procese las $nF secuencias de GISAID.\n");
+#print ("numero de secuencias mexicanas en nextstrain .......................................: $ns\n");
+#print ("numero de secuencias mexicanas en GISAID (sin procesar) ............................: $ng\n");
+#print ("numero de secuencias que estan en GISAID (sin procesar) y que faltan en nextstrain .: $nf\n");
+#print ("numero de secuencias faltantes en nextstrain que encontro en GISAID (procesado) ....: $m\n");
+#print ("numero de secuencias faltantes en nextstrain que no encontro en GISAID (procesado) .: $nF\n");
+#print ("\nNota: es necesario esperar a que Nextstrain procese las $nF secuencias de GISAID\n");
 
-print ("Selected sequences in Nextstrain.........................................: $ns\n");
-print ("Selected sequences in GISAID (unprocessed)...............................: $ng\n");
-print ("Selected sequences in GISAID (unprocessed) lacking in Nextstrain.........: $nf\n");
-print ("Lacking selected sequences in Nextstrain found in GISAID (processed).....: $m\n");
-print ("Lacking selected sequences in Nextstrain not found in GISAID (processed).: $nF\n");
+print ("Selected sequences from Nextstrain .......................................: $ns\n");
+print ("Selected sequences from GISAID ...........................................: $ng\n");
+print ("Selected sequences from GISAID that are absent in Nextstrain .............: $nf\n");
+print ("Selected sequences from GISAID that are absent in Nextstrain, recovered ..: $m\n");
+print ("Selected sequences from GISAID that continue to be absent from Nextstrain.: $nF\n");
 
 print ("-----\n");
 
