@@ -34,9 +34,7 @@ my %gisaid;
 # Primero guardo los IDs de las secuencias que estan en el archivo de Nextstrain
 
 my $ns = 0;
-#print ("Secuencias que estan en el analisis de filodinamica de Nextstrain\n");
-print ("Sequences from Mexico in Nextstrain latest analysis (file: $fileNs)\n");
-print ("note: not all these sequences will be in the GISAID set\n");
+print ("Sequences from Mexico in Nextstrain latest global analysis (file: $fileNs)\n");
 open (MIA, "$fileNs") or die ("Can't open file $fileNs\n");
 while (my $linea = <MIA>){
 	chomp ($linea);
@@ -55,8 +53,6 @@ print ("-----\n");
 my $ng = 0;
 my $ng_0 = 0;
 my $ng_1 = 0;
-#print ("Secuencias de Mexico en GISAID\n");
-#print ("(no todas estas secuencias han sido procesadas para Nextstrain necesariamente)\n");
 print ("Sequences from Mexico in GISAID (file: $fileGS)\n");
 print ("note: not all these sequences will be in the Nextstrain set\n");
 open (MIA, "$fileGS") or die ("Can't open file $fileGS\n");
@@ -92,7 +88,7 @@ print ("-----\n");
 # Ahora veo cuales secuencias de Nextstrain faltan en GISAID-Mex
 
 my $nN = 0;
-print ("Sequences in Nextstrain latest analysis lacking in GISAID\n");
+print ("Sequences in Nextstrain latest global analysis lacking in the GISAID set\n");
 my @knextstrain = sort keys (%nextstrain);
 for (my $i = 0; $i <= $#knextstrain; $i++){
 	if ($nextstrain{$knextstrain[$i]} == 0){
@@ -108,8 +104,6 @@ print ("-----\n");
 # Ahora veo cuales secuencias de GISAID-Mex faltan en Nextstrain
 
 my $nf = 0;
-#print ("Secuencias de Mexico en GISAID que no estan en el analisis de filodinamica de Nextstrain\n");
-#print ("(son las que tengo que buscar en el archivo $fileSe)\n");
 print ("Sequences from GISAID lacking in Nextstrain latest analysis\n");
 my @kgisaid = sort keys (%gisaid);
 for (my $i = 0; $i <= $#kgisaid; $i++){
@@ -211,8 +205,6 @@ for (my $i = 0; $i <= $#keys; $i++){
 # Ahora veo cuales secuencias de GISAID-Mex me siguen faltando en Nextstrain
 
 my $nF = 0;
-#print ("Secuencias de Mexico en GISAID que aun no han sido procesadas para Nextstrain\n");
-#print ("(tendria que descargarlas manualmente de GISAID junto con sus metadatos)\n");
 print ("Sequences from GISAID not yet included in Nextstrain\n");
 print ("note: these sequences (if anay) and their metadata have to be downloaded from GISAID and included manually in outfile.fasta and outfile.txt\n");
 for (my $i = 0; $i <= $#kgisaid; $i++){
@@ -228,18 +220,11 @@ print ("-----\n");
 #-----------------------------------------------------------------------------------------
 # Ahora hago un reporte
 
-#print ("numero de secuencias mexicanas en nextstrain .......................................: $ns\n");
-#print ("numero de secuencias mexicanas en GISAID (sin procesar) ............................: $ng\n");
-#print ("numero de secuencias que estan en GISAID (sin procesar) y que faltan en nextstrain .: $nf\n");
-#print ("numero de secuencias faltantes en nextstrain que encontro en GISAID (procesado) ....: $m\n");
-#print ("numero de secuencias faltantes en nextstrain que no encontro en GISAID (procesado) .: $nF\n");
-#print ("\nNota: es necesario esperar a que Nextstrain procese las $nF secuencias de GISAID\n");
-
 print ("Sequences from Mexico in Nextstrain .......................................: $ns\n");
 print ("Sequences from Mexico in GISAID ...........................................: $ng\n");
 print ("Sequences from Mexico in GISAID that are absent in Nextstrain .............: $nf\n");
 print ("Sequences from Mexico in GISAID that are absent in Nextstrain, recovered ..: $m\n");
-print ("Sequences from Mexico in Nextstrain absent from GISAID ....................: $nN\n");
+print ("Sequences from Mexico in Nextstrain absent from GISAID (not yet formated)..: $nN\n");
 print ("Sequences from Mexico in GISAID that continue to be absent from Nextstrain : $nF\n");
 print ("-----\n");
 print ("Now please cat the following files (example):\n");
