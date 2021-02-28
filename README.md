@@ -53,6 +53,10 @@ $ cat nextstrain_ncov_global_metadata.fasta outfile.fasta > nextstrain_ncov_glob
 
 Move the files nextstrain_ncov_global_metadata.fc.tsv and nextstrain_ncov_global_metadata.fc.fasta to the Nextstrain data/ directory, modify the config.yaml file and run Nextstrain!
 
+Finally, if you would like to be sure that a given set of sequences are included in your Nextstrain analysis, you can use the following script
 
+$ perl toinclude.pl nextstrain_ncov_global_metadata.fc.fasta Mexico > add_to_include.txt
+
+Just add the IDs in add_to_include.txt to the file defaults/include.txt in you local Nextstrain installation. 
 
 
