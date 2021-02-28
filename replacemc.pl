@@ -27,9 +27,12 @@ open (MIO, "$file") || die ("No puedo abrir $file\n");
 open (MIA, ">sinM.txt") || die ("No puedo abrir sinM.txt\n");
 
 while ($linea = <MIO>){
-	if ($linea =~//){
-		if ($linea =~//){
-			$linea =~ s//\n/g;
+	if ($linea =~/
+/){
+		if ($linea =~/
+/){
+			$linea =~ s/
+/\n/g;
 			print MIA ("$linea");
 			$cuantossustituyo++;
 		}
@@ -45,7 +48,6 @@ close (MIA);
 close (MIO);
 
 print (" Number of ^M: $cuantoshay\n Number of replaced ^M: $cuantossustituyo\n Number of lines without ^M: $cuantoshaySINC\n");
-#print ("Analizo $lineas lineas\n");
 
 open (MIA, "sinM.txt") or die ("no puedo abrir sinM.txt\n");
 open (ROB, ">$out") or die ("no puedo abrir $out\n");
