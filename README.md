@@ -5,7 +5,7 @@ The scripts in this repository facilitate the manipulation of data (metadata and
 
 First collect the data. Go to the latest global analysis provided by Nextstrain (https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. Next, go to GISAID (https://www.gisaid.org) and download all fasta sequences and metadata already formatted for Nextstrain analysis (you will find these files in 'Downloads'). Finally, also in GISAID go to 'Search' and download all the sequences you would like to add to the latest Nextstrain analysis.
 
-Suppose that you downloaded the following files:
+You will need to download the following files:
 
 nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
 
@@ -15,6 +15,8 @@ metadata.tsv # metadata from GISAID formatted for Nextstrain
 
 gisaid_hcov-19_Mex.fasta # selected fasta genome sequences downloaded from GISAID
 
+gisaid_hcov-19_Mex.tsv # patient status metadata associated to selected fasta genome sequences downloaded from GISAID
+
 Use the scripts as follow:
 
 Delete hiden newline characters
@@ -22,6 +24,10 @@ Delete hiden newline characters
 $ perl replacemc.pl gisaid_hcov-19_Mex.fasta
 
 $ mv gisaid_hcov-19_Mex.fasta.e1 gisaid_hcov-19_Mex.e1.fasta
+
+$ perl replacemc.pl gisaid_hcov-19_Mex.tsv
+
+$ mv gisaid_hcov-19_Mex.tsv.e1 gisaid_hcov-19_Mex.e1.tsv
 
 Get fasta sequences represented in the latest global Nextstrain analysis
 
@@ -43,13 +49,13 @@ $ mv outfile ncov_Mex_IDs.txt
 
 Create the fasta and metadata files of those sequences in gisaid_hcov-19_Mex.fasta 
 
-$ perl createfiles.pl ncov_Mex_IDs.txt gisaid_hcov-19_Mex.e1.fasta sequences.fasta metadata.tsv 
+$ perl createfiles.pl ncov_Mex_IDs.txt gisaid_hcov-19_Mex.e1.fasta sequences.fasta metadata.tsv gisaid_hcov-19_Mex.e1.tsv
 
 Concatenate the files 
 
-$ cat nextstrain_ncov_global_metadata.f.tsv outfile.txt > nextstrain_ncov_global_metadata.fc.tsv
+$ cat nextstrain_ncov_global_metadata.f.tsv outfile.txt outfile2.txt > nextstrain_ncov_global_metadata.fc.tsv
 
-$ cat nextstrain_ncov_global_metadata.fasta outfile.fasta > nextstrain_ncov_global_metadata.fc.fasta
+$ cat nextstrain_ncov_global_metadata.fasta outfile.fasta outfile2.fasta > nextstrain_ncov_global_metadata.fc.fasta
 
 Move the files nextstrain_ncov_global_metadata.fc.tsv and nextstrain_ncov_global_metadata.fc.fasta to the Nextstrain data/ directory, modify the config.yaml file and run Nextstrain!
 
