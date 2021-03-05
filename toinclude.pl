@@ -3,7 +3,7 @@
 # This script extracts IDs from a fasta file 
 
 # use
-# perl toinclude.pl nextstrain_ncov_global_metadata.fc.fasta > add_to_include.txt
+# perl toinclude.pl nextstrain_ncov_global_metadata.fc.fasta Mexico > add_to_include.txt
 
 # See https://github.com/luisdelaye/Mexstrain/ for more details
 
