@@ -83,5 +83,5 @@ $ perl selectS.pl outfileM nextstrain_ncov_global_metadata.fasta
 
 out: outfileS
 
-$ mv outfileS  nextstrain_ncov_global_metadata.selected.1.fasta
+$ mv outfileS  nextstrain_ncov_global_metadata.selected.N2.fasta
 
