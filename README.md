@@ -72,6 +72,7 @@ Other scripts
 If you would like to create a smaller set of sequences for Nextstrain analysis, you can use the following scripts:
 
 $ perl selectM.pl nextstrain_ncov_global_metadata.tsv N1 N2 > nextstrain_ncov_global_metadata.selected.N2.tsv
+
 out: outfileM
 
 where N1 refers to a column in the nextstrain_ncov_global_metadata.tsv file. Chose N1 = 6 for country. And N2 refers to the maximum number of rows from each category specified by N1. For example, if N1 = 6 and N2 = 10, you will select the first 10 rows (genomes) from each country in the nextstrain_ncov_global_metadata.tsv file.
@@ -79,6 +80,8 @@ where N1 refers to a column in the nextstrain_ncov_global_metadata.tsv file. Cho
 Next, select the secuences
 
 $ perl selectS.pl outfileM nextstrain_ncov_global_metadata.fasta
+
 out: outfileS
+
 $ mv outfileS  nextstrain_ncov_global_metadata.selected.1.fasta
 
