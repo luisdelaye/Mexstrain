@@ -1,5 +1,6 @@
 # Mexstrain
 -----------
+# Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to update a Nextstrain analysis. In Figure 1 we summaryze the sequential use of the scripts. 
