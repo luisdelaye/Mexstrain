@@ -1,5 +1,7 @@
 # Mexstrain
 -----------
+Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico reveals variants of interest (VOI) and a mutation in the Nucleocapsid protein associated with symptomatic versus asymptomatic carriers. (submited).
+
 # Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
