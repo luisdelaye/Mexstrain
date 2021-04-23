@@ -1,7 +1,5 @@
 # Mexstrain
 -----------
-Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico reveals variants of interest (VOI) and a mutation in the Nucleocapsid protein associated with symptomatic versus asymptomatic carriers. (submited).
------------
 
 # Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
@@ -70,8 +68,8 @@ $ perl toinclude.pl nextstrain_ncov_global_metadata.fc.fasta Mexico > add_to_inc
 
 Just add the IDs in add_to_include.txt to the file defaults/include.txt in you local Nextstrain installation.
 
-Other scripts
--------------
+Accompanying scripts
+--------------------
 
 If you would like to create a smaller set of sequences for Nextstrain analysis, you can use the following scripts:
 
@@ -88,4 +86,10 @@ $ perl selectS.pl outfileM nextstrain_ncov_global_metadata.fasta
 out: outfileS
 
 $ mv outfileS  nextstrain_ncov_global_metadata.selected.N2.fasta
+
+
+Supplementary material
+----------------------
+
+Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico reveals variants of interest (VOI) and a mutation in the Nucleocapsid protein associated with symptomatic versus asymptomatic carriers. (submited).
 
