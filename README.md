@@ -6,19 +6,21 @@ Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to update a Nextstrain analysis. In Figure 1 we summaryze the sequential use of the scripts. 
 
-First collect the data. Go to the latest global analysis provided by Nextstrain (https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. Next, go to GISAID (https://www.gisaid.org) and download all fasta sequences and metadata already formatted for Nextstrain analysis (you will find these files in 'Downloads'). Finally, also in GISAID go to 'Search' and download all the sequences you would like to add to the latest Nextstrain analysis and the associatet 'patient status metadata'.
+First collect the data. Go to the latest global analysis provided by Nextstrain (https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
 
-You will need to download the following files:
+Next, go to GISAID (https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences (spikeprot####.fasta) in FASTA format ('Downloads -> Alignment and proteins').
+
+In summary, you will have to download from Nextstrain and GISAID the following files:
 
 nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
 
-sequences.fasta # fasta genome sequences from GISAID formated for Nextstrain
+sequences.fasta # fasta genome sequences from GISAID
 
-metadata.tsv # metadata from GISAID formatted for Nextstrain
+metadata.tsv # metadata from GISAID
 
-gisaid_hcov-19_Mex.fasta # selected fasta genome sequences downloaded from GISAID
+spikeprot####.fasta # Spike protein sequences from GISAID
 
-gisaid_hcov-19_Mex.tsv # patient status metadata associated to selected fasta genome sequences downloaded from GISAID
+
 
 Use the scripts as follow:
 
