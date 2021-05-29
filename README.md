@@ -20,7 +20,7 @@ metadata.tsv # metadata from GISAID
 
 spikeprot####.fasta # Spike protein sequences from GISAID
 
-# Curate the files containing the names of geographic locations
+* Curate the files containing the names of geographic locations 
 
 The file color_ordering.tsv contains the names of geographic localities in Nextstrain. These names are organized in: regions, countries, division and localities. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same.
 
