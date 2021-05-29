@@ -20,9 +20,15 @@ metadata.tsv # metadata from GISAID
 
 spikeprot####.fasta # Spike protein sequences from GISAID
 
-#-
+# Curate the files containing the names of geographic locations
 
-The first thing to do is to curate the color_ordering.tsv file from Nexstrain. This is to be sure that the names of the geographic localities between GISAID metadata.tsv file and the Nexstrain color_ordering.tsv file match. We will asume that you have a local Nexstrain instalation. You can locate the color_ordering.tsv file in ncov/defaults/color_ordering.tsv.
+The file color_ordering.tsv contains the names of geographic localities in Nextstrain. These names are organized in: regions, countries, division and localities. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same.
+
+We will asume that you have a local Nexstrain instalation. You can locate the color_ordering.tsv file in ncov/defaults/color_ordering.tsv. 
+
+$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv
+
+# Work in progress...
 
 Delete hiden newline characters
 
