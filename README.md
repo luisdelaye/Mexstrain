@@ -20,9 +20,9 @@ metadata.tsv # metadata from GISAID
 
 spikeprot####.fasta # Spike protein sequences from GISAID
 
+#-
 
-
-Use the scripts as follow:
+The first thing to do is to curate the color_ordering.tsv file from Nexstrain. This is to be sure that the names of the geographic localities between GISAID metadata.tsv file and the Nexstrain color_ordering.tsv file match. We will asume that you have a local Nexstrain instalation. You can locate the color_ordering.tsv file in ncov/defaults/color_ordering.tsv.
 
 Delete hiden newline characters
 
