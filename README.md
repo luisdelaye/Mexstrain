@@ -1,34 +1,35 @@
 # Mexstrain
 -----------
 
-# Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
+### Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
-The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to update a Nextstrain analysis. In Figure 1 we summaryze the sequential use of the scripts. 
+The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis (Figure 1). 
 
-First collect the data. Go to the latest global analysis provided by Nextstrain (https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
+### Collect data
+First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
 
-Next, go to GISAID (https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences (spikeprot####.fasta) in FASTA format ('Downloads -> Alignment and proteins').
+Next, go to [GISAID](https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
-nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
+* nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
 
-sequences.fasta # fasta genome sequences from GISAID
+* sequences.fasta # fasta genome sequences from GISAID
 
-metadata.tsv # metadata from GISAID
+* metadata.tsv # metadata from GISAID
 
-spikeprot####.fasta # Spike protein sequences from GISAID
+* spikeprot####.fasta # Spike protein sequences from GISAID
 
-* Curate the files containing the names of geographic locations 
+### Curate the files containing the names of geographic locations 
 
 The file color_ordering.tsv contains the names of geographic localities in Nextstrain. These names are organized in: regions, countries, division and localities. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same.
 
-We will asume that you have a local Nexstrain instalation. You can locate the color_ordering.tsv file in ncov/defaults/color_ordering.tsv. 
+We will asume that you have a local Nexstrain instalation. You can find the color_ordering.tsv file in ncov/defaults/color_ordering.tsv. 
 
 $ perl curatelocationnames.pl color_ordering.tsv metadata.tsv
 
-# Work in progress...
+### Work in progress... June 02, 2021 - last update
 
 Delete hiden newline characters
 
