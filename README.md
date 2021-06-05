@@ -6,6 +6,10 @@ Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis (Figure 1). 
 
+<p align="center">
+  <img width="720" height="540" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure_1.jpg">
+</p>
+
 ### Collect data
 First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
 
