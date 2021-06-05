@@ -1,10 +1,10 @@
 # Mexstrain
 -----------
 
-### Important: GISAID changed its file formats, we need to update ours scripts before they are useful again, we are working on it! 
+### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
-The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to focus on a Country (Figure 1). 
+The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis in a given Country (Figure 1). 
 
 <p align="center">
   <img width="1032" height="578" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure1-Mexstrain2.png">
@@ -27,11 +27,73 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 
 ### Curate the files containing the names of geographic locations 
 
-The file color_ordering.tsv contains the names of geographic localities in Nextstrain. These names are organized in: regions, countries, division and localities. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same.
+We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: regions, countries, division and localities. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curatelocationname.pl. To run the script write:
 
-We will asume that you have a local Nexstrain instalation. You can find the color_ordering.tsv file in ncov/defaults/color_ordering.tsv. 
+```
+$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
+```
 
-$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv
+In our example data, the first time you run the curatelocationname.pl script you will get the following output:
+
+```
+No substitute.tsv file provided
+
+names in metadata.tsv: North America / Mexico / State of Mexico
+lowercase names......: north america / mexico / state of mexico
+Waring! name not found in color_ordering.original.tsv: 'state of mexico'
+
+names in metadata.tsv: North America / Mexico / Coahuila de Zaragoza
+lowercase names......: north america / mexico / coahuila de zaragoza
+Waring! name not found in color_ordering.original.tsv: 'coahuila de zaragoza'
+
+names in metadata.tsv: North America / Mexico / State of Mexico / Nicolas Romero
+lowercase names......: north america / mexico / state of mexico / nicolas romero
+Waring! name not found in color_ordering.original.tsv: 'state of mexico'
+
+names in metadata.tsv: North America / Mexico / Ciudad de Mexico
+lowercase names......: north america / mexico / ciudad de mexico
+Waring! name not found in color_ordering.original.tsv: 'ciudad de mexico'
+
+names in metadata.tsv: North America / Mexico / Jalisco / Puerto Vallarta
+lowercase names......: north america / mexico / jalisco / puerto vallarta
+Waring! name not found in color_ordering.original.tsv: 'puerto vallarta'
+
+names in metadata.tsv: North America / Mexico / Jalisco / Zapopan
+lowercase names......: north america / mexico / jalisco / zapopan
+Waring! name not found in color_ordering.original.tsv: 'zapopan'
+
+names in metadata.tsv: North America / Mexico / Yucatán
+lowercase names......: north america / mexico / yucatán
+Waring! name not found in color_ordering.original.tsv: 'yucatán'
+
+------------------------------------------------------------------------
+The following names don't match any name in the color_ordering.tsv file:
+
+'ciudad de mexico'
+'coahuila de zaragoza'
+'puerto vallarta'
+'state of mexico'
+'yucatán'
+'zapopan'
+
+------------------------------------------------------------------------
+Provide a substitution.tsv file or add the names to color_ordering.tsv.
+See https://github.com/luisdelaye/Mexstrain/ for more details.
+------------------------------------------------------------------------
+```
+
+Based on the above result, you have to decide: i) if you want to change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file; or ii) if you want to change the names of the color_ordering.tsv file so they match those of the metadata.tsv file; or iii) if you have to add some names to the color_ordering.tsv file.
+
+In our example, we first are going to change the name of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file. We do this by creating a two column text file containing the names of the geographic localities to be substituted. In the first column we write the name to be substituted and in the second column we write the substitution name. The columns must be separated by tabs. Write all names in lowercase. An example of a substitute.tsv file is shown next:
+
+```
+state of mexico	estado de mexico
+coahuila de zaragoza	coahuila
+ciudad de mexico	mexico city
+yucat	yucatan
+```
+As you can see, we substituted 'state of mexico' by 'estado de mexico' and 'coahuila de zaragoza' by 'coahuila'. It is worth mentioning the case of 'yucatan'. In the color_ordering.tsv file the State is written as 'Yucatan' however in the metadata.tsv is written as 'Yucatán' (with accent in the 'a'). By general rule, it is better to avoid accentuated vowels. Because we use regular expression within the script, to replace the world 'Yucatán' by 'Yucatan' it is enough to write only the first part: 'yucat'. 
+
 
 ### Work in progress... June 02, 2021 - last update
 
