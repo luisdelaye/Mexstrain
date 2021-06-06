@@ -144,6 +144,8 @@ $ mv outfile.tsv metadata.e1.tsv
 
 ### Create the metadata file for Nextstrain
 
+Next, we are going to create the metadata file in the format required for Nextstrain.
+
 
 ### Work in progress... 
 
