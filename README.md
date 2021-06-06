@@ -1,7 +1,7 @@
 # Mexstrain
 -----------
 
-### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! 
+### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! last update: June 06, 2021
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis in a given Country (Figure 1). 
@@ -25,12 +25,12 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 
 * spikeprot####.fasta # Spike protein sequences from GISAID
 
-### Curate the files containing the names of geographic locations 
+### Curate the files containing the names of geographic localities 
 
-We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: regions, countries, division and localities. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curatelocationname.pl. To run the script write:
+We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: region, country, division and location. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curatelocationname.pl. To run the script write:
 
 ```
-$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
+$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico
 ```
 
 In our example data, the first time you run the curatelocationname.pl script you will get the following output:
@@ -82,7 +82,7 @@ See https://github.com/luisdelaye/Mexstrain/ for more details.
 ------------------------------------------------------------------------
 ```
 
-Based on the above result, you have to decide: i) if you want to change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file; or ii) if you want to change the names of the color_ordering.tsv file so they match those of the metadata.tsv file; or iii) if you have to add some names to the color_ordering.tsv file.
+Based on the above result, you have to decide: i) if you want to change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file; ii) if you want to change the names of the color_ordering.tsv file so they match those of the metadata.tsv file; or iii) if you have to add some names to the color_ordering.tsv file.
 
 In our example, we first are going to change the name of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file. We do this by creating a two column text file containing the names of the geographic localities to be substituted. In the first column we write the name to be substituted and in the second column we write the substitution name. The columns must be separated by tabs. Write all names in lowercase. An example of a substitute.tsv file is shown next:
 
@@ -92,10 +92,60 @@ coahuila de zaragoza	coahuila
 ciudad de mexico	mexico city
 yucat	yucatan
 ```
-As you can see, we substituted 'state of mexico' by 'estado de mexico' and 'coahuila de zaragoza' by 'coahuila'. It is worth mentioning the case of 'yucatan'. In the color_ordering.tsv file the State is written as 'Yucatan' however in the metadata.tsv is written as 'Yucatán' (with accent in the 'a'). By general rule, it is better to avoid accentuated vowels. Because we use regular expression within the script, to replace the world 'Yucatán' by 'Yucatan' it is enough to write only the first part: 'yucat'. 
+
+As you can see, we substituted 'state of mexico' by 'estado de mexico' and 'coahuila de zaragoza' by 'coahuila'. It is worth mentioning the case of 'yucatan'. In the color_ordering.tsv file the State is written as 'Yucatan' however in the metadata.tsv is written as 'Yucatán' (with accent in the 'a'). By general rule, it is better to avoid accentuated vowels. Because we use regular expression within the script, to replace the world 'Yucatán' by 'Yucatan' it is enough to write only the first part of the name: 'yucat' and the script will do the rest. 
+
+If you would like to change the names of the color_ordering.tsv file instead, simply open the file with a text editor (like [ATOM](https://atom.io)) and change it. Also avoid writting vowels with accents.
+
+Next, you will have to add the names of 'puerto vallarta' and 'zapopan' to the color_ordering.tsv file. Note that these names correspond to the category: 'location' within the 'division' of Jalisco. Therefore you will have to add the following text:
+
+```
+# Jalisco
+location	Puerto Vallarta
+location	Zapopan
+```
+
+Next, you run the script again to see if there are no more mismatches:
+
+```
+$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
+```
+
+If there are no more mismatches you should get the following ouptup:
+
+```
+------------------------------------------------------------------------
+The following names don't match any name in the color_ordering.tsv file:
 
 
-### Work in progress... June 02, 2021 - last update
+------------------------------------------------------------------------
+Provide a substitution.tsv file or add the names to color_ordering.tsv.
+See https://github.com/luisdelaye/Mexstrain/ for more details.
+------------------------------------------------------------------------
+```
+
+Finally, because you added two new localities and changed the names of four divisions in the color_ordering.tsv file, you have to make the same changes to the lat_longs.tsv file within Nextstrain. You can find this file within: ncov/defaults/lat_longs.tsv. Next we show these names within the lat_longs.tsv file:
+
+```
+division	Coahuila	27.302222	-102.044722
+division	Estado de Mexico	19.354167	-99.630833
+division	Mexico City	19.419444	-99.145556
+division	Yucatan	20.833333	-89
+
+location	Puerto Vallarta	20.617	-105.23018
+location	Zapopan	20.720278	-103.391944
+```
+
+The curatelocationnames.pl script will output a file named outfile.tsv. This file is the new metadata. It contains the new geographic names, all in lowercase. Change the name of this file:
+
+```
+$ mv outfile.tsv metadata.e1.tsv
+```
+
+### Create the metadata file for Nextstrain
+
+
+### Work in progress... 
 
 Delete hiden newline characters
 
@@ -166,5 +216,5 @@ $ mv outfileS  nextstrain_ncov_global_metadata.selected.N2.fasta
 Supplementary material
 ----------------------
 
-Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico reveals variants of interest (VOI) and a mutation in the Nucleocapsid protein associated with symptomatic versus asymptomatic carriers. (submited).
+Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico during the pre-vaccination stage reveals variants of interest B.1.1.28.4, B.1.1.222 or B.1.1.519 and B.1.243. (submited).
 
