@@ -7,7 +7,7 @@ Perl scripts to manipulate data derived from GISAID and Nextstrain.
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis in a given Country (Figure 1). 
 
 <p align="center">
-  <img width="1032" height="578" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-1-Mexstrain.png">
+  <img width="1032" height="558" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-1-Mexstrain.png">
 </p>
 
 ### Collect data
@@ -27,13 +27,13 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 
 ### Curate the files containing the names of geographic localities 
 
-We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: region, country, division and location. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curatelocationname.pl. To run the script write:
+We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: region, country, division and location. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curate_names.pl. To run the script write:
 
 ```
-$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico
+$ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico
 ```
 
-In our example data, the first time you run the curatelocationname.pl script you will get the following output:
+In our example data, the first time you run the curate_names.pl script you will get the following output:
 
 ```
 No substitute.tsv file provided
@@ -108,7 +108,7 @@ location	Zapopan
 Next, you run the script again to see if there are no more mismatches:
 
 ```
-$ perl curatelocationnames.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
+$ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
 ```
 
 If there are no more mismatches you should get the following ouptup:
@@ -136,7 +136,7 @@ location	Puerto Vallarta	20.617	-105.23018
 location	Zapopan	20.720278	-103.391944
 ```
 
-The curatelocationnames.pl script will output a file named outfile.tsv. This file is the new metadata. It contains the new geographic names, all in lowercase. Change the name of this file:
+The curate_names.pl script will output a file named outfile.tsv. This file is the new metadata. It contains the new geographic names, all in lowercase. Change the name of this file:
 
 ```
 $ mv outfile.tsv metadata.e1.tsv
