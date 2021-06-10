@@ -152,7 +152,7 @@ Now, run the script create_metadata.pl:
 $ perl create_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt color_ordering.tsv
 ```
 
-It is possible that you may get the following warning message:
+It is possible that you get the following warning message:
 
 ```
 Warning! misspelled names:
