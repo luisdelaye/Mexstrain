@@ -1,10 +1,10 @@
 # Mexstrain
 -----------
 
-### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! last update: June 06, 2021
+### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! last update: June 10, 2021
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
-The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis in a given Country (Figure 1). 
+The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis focused in a given Country (Figure 1). 
 
 <p align="center">
   <img width="1032" height="578" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-1-Mexstrain.png">
@@ -114,14 +114,7 @@ $ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
 If there are no more mismatches you should get the following ouptup:
 
 ```
-------------------------------------------------------------------------
-The following names don't match any name in the color_ordering.tsv file:
-
-
-------------------------------------------------------------------------
-Provide a substitution.tsv file or add the names to color_ordering.tsv.
-See https://github.com/luisdelaye/Mexstrain/ for more details.
-------------------------------------------------------------------------
+All names in metadata.tsv have a match in color_ordering.tsv
 ```
 
 Finally, because you added two new localities and changed the names of four divisions in the color_ordering.tsv file, you have to make the same changes to the lat_longs.tsv file within Nextstrain. You can find this file within: ncov/defaults/lat_longs.tsv. Next we show these names within the lat_longs.tsv file:
@@ -141,6 +134,8 @@ The curate_names.pl script will output a file named outfile.tsv. This file is th
 ```
 $ mv outfile.tsv metadata.e1.tsv
 ```
+
+A final tweak to the color_ordering.tsv file is necessary before we go to the next step. Open the color_ordering.tsv file with a text editor (like [ATOM](https://atom.io)) and replace 'Sobral de Monte Agrac O' by 'Sobral de Monte Agraco'. There is a hidden caracter in the last word 'Agrac O' that has to be removed. 
 
 ### Create the metadata file for Nextstrain
 
