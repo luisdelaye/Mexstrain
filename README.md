@@ -139,7 +139,53 @@ A final tweak to the color_ordering.tsv file is necessary before we go to the ne
 
 ### Create the metadata file for Nextstrain
 
-Next, we are going to create the metadata file in the format required for Nextstrain.
+Next, we are going to create the metadata file in the format required for Nextstrain. But first, we need to prepare some files:
+
+```
+$ grep '>' sequences.fasta > sequences.fasta.headers.txt
+$ grep '>' spikeprot####.fasta spikeprot####.fasta.headers.txt 
+```
+
+Now, run the script create_metadata.pl:
+
+```
+$ perl create_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt color_ordering.tsv
+```
+
+It is possible that you may get the following warning message:
+
+```
+Warning! misspelled names:
+Category	(right name)	(misspelled name)
+Location	(Šumavské Hoštice)	(?umavské Hoštice)
+
+There are misspelled names
+You have to open create_metadata.pl and code Perl to fix the problem
+Go to the bottom of the file and where indicated, code:
+
+  } elsif ($newword =~ /misspelled name/){
+    $newword = 'right name';
+
+You may need to use pattern matching to contend with unusual characters
+Press enter to continue
+```
+
+If you get this message, you will have to open the create_metadata.pl file and go to the bottom to find the place where you have to code for the rigth name. For instance, in the example above you would have to code the following to fix the name:
+
+```
+  } elsif ($newword =~ /^.+umavsk.+ Ho.+tice$/){
+   $newword = 'Šumavské Hoštice';
+```
+
+Notice that I used pattern matching to match the misspelled name: '?umavské Hoštice'.
+
+If you don't get the warning message, simply rename the outfile.tsv
+
+```
+$ mv outfile.tsv metadata.e2.tsv 
+
+```
+
 
 
 ### Work in progress... 
