@@ -11,9 +11,12 @@ The scripts in this repository facilitate the manipulation of data (metadata and
 </p>
 
 ### Collect data
+
 First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
 
 Next, go to [GISAID](https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'.
+
+Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download all complete and high coverage sequences from Mexico.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -24,6 +27,8 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 * metadata.tsv # metadata from GISAID
 
 * spikeprot####.fasta # Spike protein sequences from GISAID
+
+* gisaid_hcov-19_2021_##_##_##.tsv # metadata associated to the genomes of interest from GISAID
 
 ### Curate the files containing the names of geographic localities 
 
@@ -154,6 +159,7 @@ $ perl create_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot#
 
 It is possible that you get the following warning message:
 
+
 ```
 Warning! misspelled names:
 Category	(right name)	(misspelled name)
@@ -172,6 +178,7 @@ Press enter to continue
 
 If you get this message, you will have to open the create_metadata.pl file and go to the bottom to find the place where you have to code for the rigth name. For instance, in the example above you would have to code the following to fix the name:
 
+
 ```
   } elsif ($newword =~ /^.+umavsk.+ Ho.+tice$/){
    $newword = 'Šumavské Hoštice';
@@ -181,11 +188,28 @@ Notice that I used pattern matching to match the misspelled name: '?umavské Ho�
 
 If you don't get the warning message, simply rename the outfile.tsv
 
+
 ```
 $ mv outfile.tsv metadata.e2.tsv 
-
 ```
 
+### Sample sequences for Nexstrain analysis
+
+The following script will sample N number of sequences of each [Pangolin](https://cov-lineages.org/pangolin.html) lineage per month. The script samples all different available lineages per month. Also, the script uses a random number generator to select which genomes to sample. If you use the same number in subsequent runs, you will get the same set of sequences. In our example, we will select at most 5 sequences of each Pangolin lineage per month and use the number 31416 to seed the random number generator.
+
+Before running the script, we have to delete hidden new line characters:
+
+```
+$ perl replacemc.pl gisaid_hcov-19_2021_##_##_##.tsv 
+$ mv gisaid_hcov-19_2021_##_##_##.tsv.e1 gisaid_hcov-19_2021_##_##_##.e1.tsv 
+```
+
+Now, we run the script to sample the sequences:
+
+```
+$ perl selectgenomes.pl gisaid_hcov-19_2021_##_##_##.e1.tsv 31416 5
+
+```
 
 
 ### Work in progress... 
