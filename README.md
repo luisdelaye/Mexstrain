@@ -1,7 +1,7 @@
 # Mexstrain
 -----------
 
-### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! last update: June 10, 2021
+### Important: GISAID changed its file formats, we are updating our scripts so they become useful again, we are working on it! last update: June 11, 2021
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis focused in a given Country (Figure 1). 
@@ -142,7 +142,7 @@ $ mv outfile.tsv metadata.e1.tsv
 
 A final tweak to the color_ordering.tsv file is necessary before we go to the next step. Open the color_ordering.tsv file with a text editor (like [ATOM](https://atom.io)) and replace 'Sobral de Monte Agrac O' by 'Sobral de Monte Agraco'. There is a hidden caracter in the last word 'Agrac O' that has to be removed. 
 
-### Create the metadata file for Nextstrain
+### Format the metadata file for Nextstrain
 
 Next, we are going to create the metadata file in the format required for Nextstrain. But first, we need to prepare some files:
 
@@ -151,10 +151,10 @@ $ grep '>' sequences.fasta > sequences.fasta.headers.txt
 $ grep '>' spikeprot####.fasta spikeprot####.fasta.headers.txt 
 ```
 
-Now, run the script create_metadata.pl:
+Now, run the script format_metadata.pl:
 
 ```
-$ perl create_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt color_ordering.tsv
+$ perl format_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt color_ordering.tsv
 ```
 
 It is possible that you get the following warning message:
@@ -176,7 +176,7 @@ You may need to use pattern matching to contend with unusual characters
 Press enter to continue
 ```
 
-If you get this message, you will have to open the create_metadata.pl file and go to the bottom to find the place where you have to code for the rigth name. For instance, in the example above you would have to code the following to fix the name:
+If you get this message, you will have to open the format_metadata.pl file and go to the bottom to find the place where you have to code for the rigth name. For instance, in the example above you would have to code the following to fix the name:
 
 
 ```
@@ -220,6 +220,16 @@ $ perl selectgenomesN.pl nextstrain_ncov_global_metadata.tsv 31416 5
 $ mv outfile.tsv nextstrain_ncov_global_metadata.selected.tsv
 ```
 
+### Create the sequence and metadata files for Nexstrain analysis
+
+Now we are going to join selected genome sequences (and their associated metadata) from GISAID and Nexstrain into a file (each) for Nextstrain analysis.
+
+```
+$ perl integrategenomes.pl gisaid_hcov-19_2021_05_13_21.e1.selected.tsv nextstrain_ncov_global_metadata.selected.tsv metadata.e2.tsv sequences.fasta
+out: outfile.tsv, outfile.fasta
+$ mv outfile.tsv metadata.selected.tsv
+$ mv outfile.fasta sequences.selected.fasta
+```
 
 
 
