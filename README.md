@@ -204,11 +204,11 @@ $ perl replacemc.pl gisaid_hcov-19_2021_##_##_##.tsv
 $ mv gisaid_hcov-19_2021_##_##_##.tsv.e1 gisaid_hcov-19_2021_##_##_##.e1.tsv 
 ```
 
-Now, we run the script to sample the sequences:
+Now, run the script to sample the sequences:
 
 ```
 $ perl selectgenomes.pl gisaid_hcov-19_2021_##_##_##.e1.tsv 31416 5
-
+$ mv outfile.tsv gisaid_hcov-19_2021_##_##_##.e1.selected.tsv
 ```
 
 
