@@ -324,28 +324,8 @@ $ perl toinclude.pl nextstrain_ncov_global_metadata.fc.fasta Mexico > add_to_inc
 
 Just add the IDs in add_to_include.txt to the file defaults/include.txt in you local Nextstrain installation.
 
-Accompanying scripts
---------------------
-
-If you would like to create a smaller set of sequences for Nextstrain analysis, you can use the following scripts:
-
-$ perl selectM.pl nextstrain_ncov_global_metadata.tsv N1 N2 > nextstrain_ncov_global_metadata.selected.N2.tsv
-
-out: outfileM
-
-where N1 refers to a column in the nextstrain_ncov_global_metadata.tsv file. Chose N1 = 6 for country. And N2 refers to the maximum number of rows from each category specified by N1. For example, if N1 = 6 and N2 = 10, you will select the first 10 rows (genomes) from each country in the nextstrain_ncov_global_metadata.tsv file.
-
-Next, select the secuences
-
-$ perl selectS.pl outfileM nextstrain_ncov_global_metadata.fasta
-
-out: outfileS
-
-$ mv outfileS  nextstrain_ncov_global_metadata.selected.N2.fasta
-
-
 Supplementary material
 ----------------------
 
-Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico during the pre-vaccination stage reveals variants of interest B.1.1.28.4, B.1.1.222 or B.1.1.519 and B.1.243. (submited).
+Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico during the pre-vaccination stage reveals variants of interest B.1.1.28.4, B.1.1.222 or B.1.1.519 and B.1.243 with mutations in the Spike protein and the Nucleocapsid. (submited).
 
