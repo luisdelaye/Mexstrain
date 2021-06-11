@@ -222,7 +222,7 @@ $ mv outfile.tsv nextstrain_ncov_global_metadata.selected.tsv
 
 ### Create the sequence and metadata files for Nexstrain analysis
 
-Now we are going to join selected genome sequences (and their associated metadata) from GISAID and Nexstrain into a file (each) for Nextstrain analysis.
+Now we are going to join selected genome sequences (and their associated metadata) from GISAID and Nexstrain into a file (each) for Nextstrain analysis. This will take a while...
 
 ```
 $ perl integrategenomes.pl gisaid_hcov-19_2021_05_13_21.e1.selected.tsv nextstrain_ncov_global_metadata.selected.tsv metadata.e2.tsv sequences.fasta
@@ -231,7 +231,50 @@ $ mv outfile.tsv metadata.selected.tsv
 $ mv outfile.fasta sequences.selected.fasta
 ```
 
+Now, check wheter the sequences used as external group by Nextstrain are among those that are selected:
 
+```
+$ grep 'EPI_ISL_402125' metadata.selected.tsv 
+$ grep 'EPI_ISL_406798' metadata.selected.tsv 
+```
+
+If they are not, includ them with the following script:
+
+```
+$ perl addexternalgroup.pl metadata.selected.tsv
+$ mv outfile.tsv metadata.selected.e1.tsv
+$ cat sequences.selected.fasta EPI_ISL_402125.fasta EPI_ISL_406798.fasta > sequences.selected.e1.fasta
+```
+
+Note that you have to download the sequences EPI_ISL_402125 and EPI_ISL_406798 from [GISAID](https://www.gisaid.org) before concatenating the fasta files. Make sure that the sequence EPI_ISL_402125 contains the header: hCoV-19/Wuhan/Hu-1/2019|2019-12-31|2020-01-12 and the sequence EPI_ISL_406798 contains the header hCoV-19/Wuhan/WH01/2019|2019-12-26|2020-01-30.
+
+Now, a final tweaks to the metadata file:
+
+```
+$ perl addcolumns.pl metadata.selected.tsv
+$ mv outfile.tsv metadata.selected.tsv
+$ perl substitutename.pl metadata.selected.tsv 
+$ mv outfile metadata.selected.tsv
+$ perl substitutename.pl sequences.selected.fasta
+$ mv outfile sequences.selected.fasta
+```
+
+With this, you have the sequence and the metadata files required to run a Nextstrain analysis:
+
+```
+metadata.selected.tsv
+sequences.selected.fasta
+```
+
+But we haven't finished yet. You may want to tell Nextstrain to include in the analysis all the sequences from the country (in this case Mexico) you which to focus on. For this you can use the following script:
+
+```
+$ perl addtoinclude.pl sequences.selected.fasta Mexico > add_toinclude.txt
+```
+
+Now you will simply add the names of the sequences in the file add_toinclude.txt to the file ncov/defaults/include.txt.
+
+Now, run Nextstrain!
 
 ### Work in progress... 
 
