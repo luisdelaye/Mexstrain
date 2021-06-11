@@ -16,7 +16,7 @@ First collect the data. Go to the latest global analysis provided by [Nextstrain
 
 Next, go to [GISAID](https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'.
 
-Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download all complete and high coverage sequences from Mexico.
+Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download all complete and high coverage sequences from Mexico (gisaid_hcov-19_2021_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage'.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -210,6 +210,17 @@ Now, run the script to sample the sequences:
 $ perl selectgenomes.pl gisaid_hcov-19_2021_##_##_##.e1.tsv 31416 5
 $ mv outfile.tsv gisaid_hcov-19_2021_##_##_##.e1.selected.tsv
 ```
+
+The script will print to the screen: collection dates, Pangolin lineages, Clades and the EPI ISL number of selected genomes.
+
+Now, you may whant to sample the genomes downloaded from Nextstrain global analysis. We can us the same seed to generate random numbers and select at most 5 sequences of each Pangolin lineage per month:
+
+```
+$ perl selectgenomesN.pl nextstrain_ncov_global_metadata.tsv 31416 5
+$ mv outfile.tsv nextstrain_ncov_global_metadata.selected.tsv
+```
+
+
 
 
 ### Work in progress... 
