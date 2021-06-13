@@ -51,12 +51,13 @@ while (my $linea = <MIA>){
   $l++;
   if ($l > 1 && $linea =~ /\w/){
     my @a = split (/\t/, $linea);
-    if ($a[22] =~ /(\d{4}-\d{2})/){
+    if ($a[20] =~ /(\d{4}-\d{2})/){
       my $date = $1;
       $dates{$date}  += 1;
-      $pango{$a[16]} += 1;
-      $clade{$a[4]} += 1;
-      push(@{$hashA->{$date}{$a[16]}}, $a[12]);
+      $pango{$a[15]} += 1;
+      $clade{$a[3]} += 1;
+      push(@{$hashA->{$date}{$a[15]}}, $a[11]);
+			#print ("$a[0]\t$date\n");
     }
   }
 }
