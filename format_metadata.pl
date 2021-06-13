@@ -234,7 +234,7 @@ foreach my $lne (@kLne){
 #close (ROB);
 if (@kLne > 0 || @kDne > 0 || @kCne > 0 || @kRne > 0){
 	print ("\nThere are misspelled names\n");
-	print ("You have to open create_metadata.pl and code Perl to fix the problem\n");
+	print ("You have to open format_metadata.pl and code Perl to fix the problem\n");
 	print ("Go to the bottom of the file and where indicated, code:\n");
 	print ("\n");
 	print ("  } elsif (\$newword =~ /misspelled name/){\n");
@@ -578,22 +578,24 @@ sub capitalize {
   } elsif ($newword =~ /^.+esk.+ Krumlov$/){
    $newword = 'Český Krumlov';
   } elsif ($newword =~ /^.+any$/){
-  	if ($newword !~ /Surany/ && $newword !~ /Germany/ && $newword !~ /^Do.+any$/ && 
-  	    $newword !~ /Piestany/ && $newword !~ /Topolcany/ && $newword !~ /Tuscany/ && 
+  	if ($newword !~ /Surany/ && $newword !~ /Germany/ && $newword !~ /^Do.+any$/ &&
+  	    $newword !~ /Piestany/ && $newword !~ /Topolcany/ && $newword !~ /Tuscany/ &&
   	    $newword !~ /Bethany/ && $newword !~ /^Chr.+any$/ && $newword !~ /Velke Ulany/){
    			$newword = 'Říčany';
    	}
   } elsif ($newword =~ /^.+umavsk.+ Ho.+tice$/){
    $newword = 'Šumavské Hoštice';
-   
-  #--------------------------------------------------------------------------------------- 
+
+  #---------------------------------------------------------------------------------------
   # If there are more misspelled names, you have to add them here:
-  
+
   # } elsif ($newword =~ /misspelled name/){
   # $newword = 'right name';
-  #--------------------------------------------------------------------------------------- 
-  
-  } 
+    } elsif ($newword =~ /Marchienne-Au-Pont/){
+    	$newword = 'Marchienne-au-Pont';
+  #---------------------------------------------------------------------------------------
+
+  }
   $newword =~ s/ And / and /;
   $newword =~ s/ Of / of /;
   $newword =~ s/ The / the /;
