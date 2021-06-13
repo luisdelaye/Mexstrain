@@ -84,7 +84,7 @@ while (my $linea = <MIA>){
 	$l++;
 	if ($l > 1){
 		my @a = split (/\t/, $linea);
-		if ($a[0] =~ /\|\d{4}-\d{2}-\d{2}\|(\d{4}-\d{2}-\d{2})$/){
+		if ($a[0] =~ /\|\d{4}-\d{2}[-\d]*\|(\d{4}-\d{2}-\d{2})$/){
 			$date_submitted = $1;
 		} else {
       die ("pattern 1 failed:\n$linea\n");
