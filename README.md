@@ -276,8 +276,3 @@ Now you will simply add the names of the sequences in the file add_toinclude.txt
 Now, run Nextstrain!
 
 
-Supplementary material
-----------------------
-
-Supplementary_Tables_1_2_3.xlsx. Barona-Gomez et al. Phylogenomics and population genomics of SARS-CoV-2 in Mexico during the pre-vaccination stage reveals variants of interest B.1.1.28.4, B.1.1.222 or B.1.1.519 and B.1.243 with mutations in the Spike protein and the Nucleocapsid. (submited).
-
