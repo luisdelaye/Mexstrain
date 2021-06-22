@@ -113,3 +113,67 @@ close (MIA);
 system ("mv outfile2.tsv outfile.tsv");
 #my $pausa = <STDIN>;
 #-----------------------------------------------------------------------------------------
+# Add VOC and VOI
+$l = 0;
+open (MIA, "outfile.tsv") or die ("Can't open file outfile.tsv\n");
+open (ROB, ">outfile2.tsv") or die ("Can't open file outfile2.tsv\n");
+while (my $linea = <MIA>){
+	chomp ($linea);
+	$l++;
+	if ($l > 1){
+		my @a = split (/\t/, $linea);
+		for (my $i = 0; $i <= $#a; $i++){
+			if ($i == 15){
+				# VOC
+				if ($a[$i] eq 'B.1.1.7'){
+					print ROB ("$a[$i]\t\tAlpha\t");
+				} elsif ($a[$i] eq 'B.1.351'){
+					print ROB ("$a[$i]\t\tBeta\t");
+				} elsif ($a[$i] eq 'P.1'){
+					print ROB ("$a[$i]\t\tGamma\t");
+				} elsif ($a[$i] eq 'B.1.617.2'){
+					print ROB ("$a[$i]\t\tDelta\t");
+				# VOI
+				} elsif ($a[$i] eq 'B.1.427'){
+					print ROB ("$a[$i]\tEpsilon\t\t");
+				} elsif ($a[$i] eq 'B.1.429'){
+					print ROB ("$a[$i]\tEpsilon\t\t");
+				} elsif ($a[$i] eq 'P.2'){
+					print ROB ("$a[$i]\tZeta\t\t");
+				} elsif ($a[$i] eq 'B.1.525'){
+					print ROB ("$a[$i]\tEta\t\t");
+				} elsif ($a[$i] eq 'P.3'){
+					print ROB ("$a[$i]\tTheta\t\t");
+				} elsif ($a[$i] eq 'B.1.526'){
+					print ROB ("$a[$i]\tIota\t\t");
+				} elsif ($a[$i] eq 'B.1.617.1'){
+					print ROB ("$a[$i]\tKappa\t\t");
+				} elsif ($a[$i] eq 'C.37'){
+					print ROB ("$a[$i]\tLambda\t\t");
+				} else {
+					print ROB ("$a[$i]\t\t\t");
+				}
+			} elsif ($i == $#a){
+				print ROB ("$a[$i]\n");
+			} else {
+	      		print ROB ("$a[$i]\t");
+	    	}
+	    }
+	} else {
+		my @a = split (/\t/, $linea);
+		for (my $i = 0; $i <= $#a; $i++){
+			if ($i == 15){
+				print ROB ("$a[$i]\tVOI\tVOC\t");
+			} elsif ($i == $#a){
+				print ROB ("$a[$i]\n");
+			} else {
+				print ROB ("$a[$i]\t");
+			}
+		}
+  	}
+}
+close (ROB);
+close (MIA);
+system ("mv outfile2.tsv outfile.tsv");
+#my $pausa = <STDIN>;
+#-----------------------------------------------------------------------------------------
