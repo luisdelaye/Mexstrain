@@ -265,6 +265,21 @@ metadata.selected.tsv
 sequences.selected.fasta
 ```
 
+Because the script addcolumns.pl adds the columns VOI and VOC to the metadata file, you will need to modify the my_auspice_config.json file. You can find this file in one of the folders of: ncov/my_profiles/. Open the file and add where properly:
+
+```
+    {
+      "key": "VOI",
+      "title": "Variants of interest",
+      "type": "categorical"
+    },
+    {
+      "key": "VOC",
+      "title": "Variants of concern",
+      "type": "categorical"
+    },
+```
+
 But we haven't finished yet. You may want to tell Nextstrain to include in the analysis all the sequences from the country (in this case Mexico) you which to focus on. For this you can use the following script:
 
 ```
