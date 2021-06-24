@@ -3,9 +3,9 @@
 # This script creates a table for Microreact
 
 # use
-# perl createmicroreact.pl lat_longs.e1.tsv aligned.fasta metadata.selected.tsv Mexico
+# perl createmicroreactall.pl lat_longs.e1.tsv metadata.selected.tsv Mexico
 
-# out: outfile.tsv, outfile_subset.tsv, prunetree.py
+# out: outfile_all.tsv
 
 # See https://github.com/luisdelaye/Mexstrain/ for more details
 
@@ -23,15 +23,12 @@
 use strict;
 
 my $file1   = $ARGV[0]; # lat_longs.tsv
-my $file2   = $ARGV[1]; # aligned.fasta
-my $file3   = $ARGV[2]; # metadata.selected.tsv
-my $Country = $ARGV[3]; # Country of selection
+my $file2   = $ARGV[1]; # metadata.selected.tsv
+my $Country = $ARGV[2]; # Country of selection
 
 my $l = 0;
 
 my %seq;
-my $prune;
-my %subseq;
 
 my %location_lat;
 my %division_lat;
@@ -66,47 +63,16 @@ while (my $linea = <MIA>){
 close (MIA);
 #die ("bien!\n");
 #-----------------------------------------------------------------------------------------
-# Save in a hash the names of the OTUs to preserve in the pruned tree
-open (MIA, "$file2") or die ("Can't open file $file2\n");
-while (my $linea = <MIA>){
-  chomp ($linea);
-  if ($linea =~ />(.+)/){
-    my $OTU = $1;
-    $seq{$OTU} = 0;
-    if ($linea =~ /\/$Country\//){
-      $prune = $prune.'"'.$OTU.'",';
-      $subseq{$OTU} = 0;
-    }
-  }
-}
-$prune = $prune.'borrame';
-$prune =~ s/,borrame//;
-close (MIA);
-open (ROB, ">prunetree.py") or die ("Can't open file prunetree.py\n");
-print ROB ("#!/usr/bin/env python\n");
-print ROB ("from ete3 import Tree\n");
-print ROB ("import sys\n");
-print ROB ("import os\n");
-print ROB ("\n");
-print ROB ("t = Tree(sys.argv[1])\n");
-print ROB ("t.prune([$prune])\n");
-print ROB ("\n");
-print ROB ("t.write(format=1, outfile=\"tree_pruned.nwk\")\n");
-close (ROB);
-#die ("bien!\n");
-#-----------------------------------------------------------------------------------------
 # Create the file for microreact
-open (MIA, "$file3") or die ("Can't open file $file3\n");
-open (ROB, ">outfile.tsv") or die ("Can't open file outfile.tsv\n");
-open (SOL, ">outfile_subset.tsv") or die ("Can't open file outfile_subset.tsv\n");
+open (MIA, "$file2") or die ("Can't open file $file2\n");
+open (ROB, ">outfile_all.tsv") or die ("Can't open file outfile_all.tsv\n");
 print ROB ("id\tlatitude\tlongitude\tyear\tmonth\tday\tvariant\tvariant__color\n");
-print SOL ("id\tlatitude\tlongitude\tyear\tmonth\tday\tvariant\tvariant__color\n");
 while (my $linea = <MIA>){
   chomp ($linea);
   $l++;
   my @a = split (/\t/, $linea);
   if ($l > 1){
-    if ($a[6] =~ /\w/){
+    if ($a[6] =~ /\w/ && $a[0] =~ /hCoV-19\/$Country\//){
       my @b = split (/-/, $a[2]);
       my $day   = ();
       my $month = ();
@@ -126,28 +92,26 @@ while (my $linea = <MIA>){
       } else {
         $day = $b[2];
       }
-      if (exists $seq{$a[0]}){
-        $seq{$a[0]} = 1;
+      if (1 == 1){
         my $v  = 'other';
         my $vc = '#A5A9A9';
-        if ($a[17] eq 'Alpha'){
+        if ($a[12] eq 'B.1.1.7'){
           $v  = 'Alpha';
           $vc = '#0075FE';
-        } elsif ($a[17] eq 'Beta'){
+        } elsif ($a[12] eq 'B.1.351'){
           $v  = 'Beta';
           $vc = '#FEA900';
-        } elsif ($a[17] eq 'Gamma'){
+        } elsif ($a[12] eq 'P.1'){
           $v  = 'Gamma';
           $vc = '#04D79E';
-        } elsif ($a[17] eq 'Delta'){
+        } elsif ($a[12] eq 'B.1.617.2'){
           $v  = 'Delta';
           $vc = '#A4EF04';
         }
         #print ("$a[0]\t$a[6]\t$location_lat{$a[6]}\t$location_lon{$a[6]}\t$year\t$month\t$day\n");
         print ROB ("$a[0]\t$location_lat{$a[6]}\t$location_lon{$a[6]}\t$year\t$month\t$day\t$v\t$vc\n"); # if ($day ne '?');
-        print SOL ("$a[0]\t$location_lat{$a[6]}\t$location_lon{$a[6]}\t$year\t$month\t$day\t$v\t$vc\n") if (exists $subseq{$a[0]});
       }
-    } elsif ($a[5] =~ /\w/){
+    } elsif ($a[5] =~ /\w/ && $a[0] =~ /hCoV-19\/$Country\//){
       my @b = split (/-/, $a[2]);
       my $day   = ();
       my $month = ();
@@ -167,28 +131,26 @@ while (my $linea = <MIA>){
       } else {
         $day = $b[2];
       }
-      if (exists $seq{$a[0]}){
-        $seq{$a[0]} = 1;
+      if (1 == 1){
         my $v  = 'other';
         my $vc = '#A5A9A9';
-        if ($a[17] eq 'Alpha'){
+        if ($a[12] eq 'B.1.1.7'){
           $v  = 'Alpha';
           $vc = '#0075FE';
-        } elsif ($a[17] eq 'Beta'){
+        } elsif ($a[12] eq 'B.1.351'){
           $v  = 'Beta';
           $vc = '#FEA900';
-        } elsif ($a[17] eq 'Gamma'){
+        } elsif ($a[12] eq 'P.1'){
           $v  = 'Gamma';
           $vc = '#04D79E';
-        } elsif ($a[17] eq 'Delta'){
+        } elsif ($a[12] eq 'B.1.617.2'){
           $v  = 'Delta';
           $vc = '#A4EF04';
         }
         #print ("$a[0]\t$a[5]\t$division_lat{$a[5]}\t$division_lon{$a[5]}\t$year\t$month\t$day\n");
         print ROB ("$a[0]\t$division_lat{$a[5]}\t$division_lon{$a[5]}\t$year\t$month\t$day\t$v\t$vc\n"); # if ($day ne '?');
-        print SOL ("$a[0]\t$division_lat{$a[5]}\t$division_lon{$a[5]}\t$year\t$month\t$day\t$v\t$vc\n") if (exists $subseq{$a[0]});
       }
-    } elsif ($a[4] =~ /\w/){
+    } elsif ($a[4] =~ /\w/ && $a[0] =~ /hCoV-19\/$Country\//){
       my @b = split (/-/, $a[2]);
       my $day   = ();
       my $month = ();
@@ -208,28 +170,26 @@ while (my $linea = <MIA>){
       } else {
         $day = $b[2];
       }
-      if (exists $seq{$a[0]}){
-        $seq{$a[0]} = 1;
+      if (1 == 1){
         my $v  = 'other';
         my $vc = '#A5A9A9';
-        if ($a[17] eq 'Alpha'){
+        if ($a[12] eq 'B.1.1.7'){
           $v  = 'Alpha';
           $vc = '#0075FE';
-        } elsif ($a[17] eq 'Beta'){
+        } elsif ($a[12] eq 'B.1.351'){
           $v  = 'Beta';
           $vc = '#FEA900';
-        } elsif ($a[17] eq 'Gamma'){
+        } elsif ($a[12] eq 'P.1'){
           $v  = 'Gamma';
           $vc = '#04D79E';
-        } elsif ($a[17] eq 'Delta'){
+        } elsif ($a[12] eq 'B.1.617.2'){
           $v  = 'Delta';
           $vc = '#A4EF04';
         }
         #print ("$a[0]\t$a[4]\t$country_lat{$a[4]}\t$country_lon{$a[4]}\t$year\t$month\t$day\n");
         print ROB ("$a[0]\t$country_lat{$a[4]}\t$country_lon{$a[4]}\t$year\t$month\t$day\t$v\t$vc\n"); # if ($day ne '?');
-        print SOL ("$a[0]\t$country_lat{$a[4]}\t$country_lon{$a[4]}\t$year\t$month\t$day\t$v\t$vc\n") if (exists $subseq{$a[0]});
       }
-    } elsif ($a[3] =~ /\w/){
+    } elsif ($a[3] =~ /\w/ && $a[0] =~ /hCoV-19\/$Country\//){
       my @b = split (/-/, $a[2]);
       my $day   = ();
       my $month = ();
@@ -249,35 +209,28 @@ while (my $linea = <MIA>){
       } else {
         $day = $b[2];
       }
-      if (exists $seq{$a[0]}){
-        $seq{$a[0]} = 1;
+      if (1 == 1){
         my $v  = 'other';
         my $vc = '#A5A9A9';
-        if ($a[17] eq 'Alpha'){
+        if ($a[12] eq 'B.1.1.7'){
           $v  = 'Alpha';
           $vc = '#0075FE';
-        } elsif ($a[17] eq 'Beta'){
+        } elsif ($a[12] eq 'B.1.351'){
           $v  = 'Beta';
           $vc = '#FEA900';
-        } elsif ($a[17] eq 'Gamma'){
+        } elsif ($a[12] eq 'P.1'){
           $v  = 'Gamma';
           $vc = '#04D79E';
-        } elsif ($a[17] eq 'Delta'){
+        } elsif ($a[12] eq 'B.1.617.2'){
           $v  = 'Delta';
           $vc = '#A4EF04';
         }
         #print ("$a[0]\t$a[3]\t$region_lat{$a[5]}\t$region_lon{$a[5]}\t$year\t$month\t$day\n");
         print ROB ("$a[0]\t$region_lat{$a[5]}\t$region_lon{$a[5]}\t$year\t$month\t$day\t$v\t$vc\n");# if ($day ne '?');
-        print SOL ("$a[0]\t$region_lat{$a[5]}\t$region_lon{$a[5]}\t$year\t$month\t$day\t$v\t$vc\n") if (exists $subseq{$a[0]});
       }
     }
   }
 }
-if ($seq{MN908947} == 0){
-  print ROB ("MN908947\t30.554807\t114.271501\t2019\t12\t26\tother\t#A5A9A9\n");
-  $seq{MN908947} = 1;
-}
-close (SOL);
 close (ROB);
 close (MIA);
 #die ("bien!\n");
