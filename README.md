@@ -293,7 +293,7 @@ Now, run Nextstrain!
 ## Microreact
 -----
 
-If you would like to visualize the sequences in [Microreact](https://microreact.org/showcase) follow these instructions. First, you will need the metadata file created above (sequences.selected.tsv) and two files from Nextstrain (lat_longs.tsv, aligned.fasta). Copy the ncov/defaults/lat_longs.tsv file to your working directory and change its name to lat_longs.e1.tsv. Open this file with a text editor and at the bottom of it, add the following:
+If you would like to visualize the above sequences in [Microreact](https://microreact.org/showcase) follow these instructions. First, you will need the metadata file created above (sequences.selected.tsv) and two files from Nextstrain (lat_longs.tsv, aligned.fasta). Copy the ncov/defaults/lat_longs.tsv file to your working directory and change its name to lat_longs.e1.tsv. Open this file with a text editor and at the bottom of it, add the following:
 
 ```
 region	Africa	4.070194	21.824559
@@ -328,5 +328,14 @@ $ iqtree -s outfile_subset.fasta -m GTR+I+G
 
 Now add the extension nwk to the phylogeny file and upload the phylogeny and the outfile_subset.tsv files to [Microreact](https://microreact.org/showcase).
 
+### Display all sequences from a country in Microreact
+
+You may want to display all sequences from a country in Microreact. For this, you will need the metadata.e2.tsv file and the following script:
+
+```
+$ perl createmicroreactall.pl lat_longs.e1.tsv metadata.e2.tsv Mexico
+```
+
+The above script will create the file outfile_all.tsv. Simply upload this file to [Microreact](https://microreact.org/showcase). Because the number of genomes is usually very high, it is not practical to do a phylogenetic analysis.
 
 
