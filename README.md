@@ -320,13 +320,13 @@ If you would like to visualize in [Microreact](https://microreact.org/showcase) 
 $ perl exstactsecs.pl outfile_subset.tsv alignment.fasta
 ```
 
-This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.selected.tsv. Rename this file to outfile_subset.fasta. Then run iqtree to infer a phylogenetic tree:
+This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.selected.tsv. Rename this file to outfile_subset.fasta. Then run [iqtree](http://www.iqtree.org) to infer a phylogenetic tree:
 
 ```
 $ iqtree -s outfile_subset.fasta -m GTR+I+G
 ```
 
-Now upload the phylogeny and the outfile_subset.tsv files to [Microreact](https://microreact.org/showcase).
+Now add the extension nwk to the phylogeny file and upload the phylogeny and the outfile_subset.tsv files to [Microreact](https://microreact.org/showcase).
 
 
 
