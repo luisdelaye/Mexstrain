@@ -154,7 +154,7 @@ Next, we are going to create the metadata file in the format required for Nextst
 
 ```
 $ grep '>' sequences.fasta > sequences.fasta.headers.txt
-$ grep '>' spikeprot####.fasta spikeprot####.fasta.headers.txt 
+$ grep '>' spikeprot####.fasta > spikeprot####.fasta.headers.txt 
 ```
 
 Now, run the script format_metadata.pl:
