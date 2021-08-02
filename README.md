@@ -168,7 +168,7 @@ It is possible that you get the following warning message:
 
 ```
 Warning! misspelled names:
-Category	(right name)	(misspelled name)
+Category	(original name)	(misspelled name)
 Location	(Šumavské Hoštice)	(?umavské Hoštice)
 
 There are misspelled names
@@ -176,13 +176,13 @@ You have to open create_metadata.pl and code Perl to fix the problem
 Go to the bottom of the file and where indicated, code:
 
   } elsif ($newword =~ /misspelled name/){
-    $newword = 'right name';
+    $newword = 'original name';
 
 You may need to use pattern matching to contend with unusual characters
 Press enter to continue
 ```
 
-If you get this message, you will have to open the format_metadata.pl file and go to the bottom to find the place where you have to code for the rigth name. For instance, in the example above you would have to code the following to fix the name:
+If you get this message, you will have to open the format_metadata.pl file and go to the bottom to find the place where you have to code for the original name. For instance, in the example above you would have to code the following to fix the name:
 
 
 ```
