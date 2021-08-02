@@ -11,7 +11,7 @@ The scripts in this repository facilitate the manipulation of data (metadata and
 
 ### Collect data
 
-First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'DOWNLOAD ALL METADATA (TSV)'. You will get a file named nextstrain_ncov_global_metadata.tsv. 
+First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'ACKNOWLEDGEMENTS (TSV)'. You will get a file named nextstrain_ncov_gisaid_global_acknowledgements.tsv. 
 
 Next, go to [GISAID](https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'.
 
@@ -19,10 +19,10 @@ Also in [GISAID](https://www.gisaid.org), download all the metadata of the genom
 
 ```
 $ perl concatenatetsvfiles.pl gisaid_hcov-19_2021_
-$ mv outfile.tsv gisaid_hcov-19_2021_##_##.tsv
+$ mv outfile.tsv gisaid_hcov-19_2021_##__##.tsv
 ```
 
-Please replace the ##_##_.tsv with an actual date.
+Please replace the ##__##_.tsv with an actual date.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -222,7 +222,7 @@ The script will print to the screen: collection dates, Pangolin lineages, Clades
 Now, you may whant to sample the genomes downloaded from Nextstrain global analysis. We can us the same seed to generate random numbers and select at most 5 sequences of each Pangolin lineage per month:
 
 ```
-$ perl selectgenomesN.pl nextstrain_ncov_global_metadata.tsv 31416 5
+$ perl selectgenomesN.pl metadata.e2.tsv nextstrain_ncov_gisaid_global_acknowledgements.tsv 31416 5
 $ mv outfile.tsv nextstrain_ncov_global_metadata.selected.tsv
 ```
 
