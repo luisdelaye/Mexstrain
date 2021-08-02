@@ -3,7 +3,7 @@
 # This script select genomes from a Nextstrain metadata file
 
 # use
-# perl selectgenomesN.pl nextstrain_ncov_global_metadata.tsv 'seed' 'n'
+# perl selectgenomesN.pl metadata.e2.tsv nextstrain_ncov_gisaid_global_acknowledgements.tsv 'seed' 'n'
 # out:
 # outfile.tsv
 
@@ -27,15 +27,19 @@ use strict;
 #-------------------------------------------------------------------------------
 # Global variables
 
-my $file   = $ARGV[0]; # nextstrain_ncov_global_metadata.tsv file
-my $seed   = $ARGV[1]; # random number
-my $rounds = $ARGV[2]; # rounds of selection
+my $meta   = $ARGV[0]; # metadata.e2.tsv file
+my $file   = $ARGV[1]; # nextstrain_ncov_global_metadata.tsv file
+my $seed   = $ARGV[2]; # random number
+my $rounds = $ARGV[3]; # rounds of selection
 
 srand($seed);
 
 my %dates;
+my %alldates;
 my %clade;
+my %allclade;
 my %pango;
+my %allpango;
 my $hashA = {};
 my %selected;
 my @selected;
@@ -44,21 +48,44 @@ my $l = 0;
 my $n = 0;
 
 #-------------------------------------------------------------------------------
-# Gather information from the gisaid_hcov-19_2021_##_##_##.tsv file
+# Gather information from the metadata.e2.tsv file
+open (MIA, "$meta") or die ("Can't open $meta\n");
+while (my $linea = <MIA>){
+	chomp ($linea);
+  $l++;
+  if ($l > 1 && $linea =~ /\w/){
+    my @a = split (/\t/, $linea);
+    if ($a[2] =~ /(\d{4}-\d{2})/){
+      my $date = $1;
+      $alldates{$a[1]} = $date;
+			$allclade{$a[1]} = $a[11];
+			$allpango{$a[1]} = $a[12];
+    }
+  }
+}
+close (MIA);
+#-------------------------------------------------------------------------------
+# Gather information from the nextstrain_ncov_gisaid_global_acknowledgements.tsv file
+$l = 0;
+$n = 0;
 open (MIA, "$file") or die ("Can't open $file\n");
 while (my $linea = <MIA>){
 	chomp ($linea);
   $l++;
   if ($l > 1 && $linea =~ /\w/){
     my @a = split (/\t/, $linea);
-    if ($a[20] =~ /(\d{4}-\d{2})/){
-      my $date = $1;
-      $dates{$date}  += 1;
-      $pango{$a[15]} += 1;
-      $clade{$a[3]} += 1;
-      push(@{$hashA->{$date}{$a[15]}}, $a[11]);
-			#print ("$a[0]\t$date\n");
-    }
+		if (exists $alldates{$a[1]}){
+    	if ($alldates{$a[1]} =~ /(\d{4}-\d{2})/){
+      	my $date = $1;
+      	$dates{$date}  += 1;
+      	$pango{$allpango{$a[1]}} += 1;
+      	$clade{$allclade{$a[1]}} += 1;
+      	push(@{$hashA->{$date}{$allpango{$a[1]}}}, $a[1]);
+				print ("$a[0]\t$date\n");
+    	}
+		#} else {
+		#	print ("no existe: $a[1]\n");
+		}
   }
 }
 close (MIA);
