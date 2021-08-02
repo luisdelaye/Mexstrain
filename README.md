@@ -19,10 +19,10 @@ Also in [GISAID](https://www.gisaid.org), download all the metadata of the genom
 
 ```
 $ perl concatenatetsvfiles.pl gisaid_hcov-19_2021_
-$ mv outfile.tsv gisaid_hcov-19_2021_##__##.tsv
+$ mv outfile.tsv gisaid_hcov-19_2021_##_##.tsv
 ```
 
-Please replace the ##__##_.tsv with an actual date.
+Please replace the ##_##_.tsv with an actual date.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
