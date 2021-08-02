@@ -193,7 +193,7 @@ close (MIA);
 #open (ROB, ">code.txt") or die ("Can't open code.txt\n");
 my @kRne = sort keys (%region_ne);
 print ("\nWarning! misspelled names:\n") if (@kRne > 0);
-print ("Category\t(right name)\t(misspelled name)\n") if (@kRne > 0);
+print ("Category\t(original name)\t(misspelled name)\n") if (@kRne > 0);
 foreach my $rne (@kRne){
   print ("Region\t($rne)\t($region_ne{$rne})\n");
   # Use this code to print elsif instructions to identify regions
@@ -203,7 +203,7 @@ foreach my $rne (@kRne){
 }
 my @kCne = sort keys (%country_ne);
 print ("\nWarning! misspelled names:\n") if (@kCne > 0);
-print ("Category\t(right name)\t(misspelled name)\n") if (@kCne > 0);
+print ("Category\t(original name)\t(misspelled name)\n") if (@kCne > 0);
 foreach my $cne (@kCne){
   print ("Country\t($cne)\t($country_ne{$cne})\n");
   # Use this code to print elsif instructions to identify countries
@@ -213,7 +213,7 @@ foreach my $cne (@kCne){
 }
 my @kDne = sort keys (%division_ne);
 print ("\nWarning! misspelled names:\n") if (@kDne > 0);
-print ("Category\t(right name)\t(misspelled name)\n") if (@kDne > 0);
+print ("Category\t(original name)\t(misspelled name)\n") if (@kDne > 0);
 foreach my $dne (@kDne){
   print ("Division\t($dne)\t($division_ne{$dne})\n");
   # Use this code to print elsif instructions to identify divisions
@@ -223,7 +223,7 @@ foreach my $dne (@kDne){
 }
 my @kLne = sort keys (%location_ne);
 print ("\nWarning! misspelled names:\n") if (@kLne > 0);
-print ("Category\t(right name)\t(misspelled name)\n") if (@kLne > 0);
+print ("Category\t(original name)\t(misspelled name)\n") if (@kLne > 0);
 foreach my $lne (@kLne){
   print ("Location\t($lne)\t($location_ne{$lne})\n");
   # Use this code to print elsif instructions to identify locations
@@ -238,7 +238,7 @@ if (@kLne > 0 || @kDne > 0 || @kCne > 0 || @kRne > 0){
 	print ("Go to the bottom of the file and where indicated, code:\n");
 	print ("\n");
 	print ("  } elsif (\$newword =~ /misspelled name/){\n");
-    print ("    \$newword = 'right name';\n");
+    print ("    \$newword = 'original name';\n");
     print ("\nYou may need to use pattern matching to contend with unusual characters\n");
 	print ("Press enter to continue\n");
 	my $pausa = <STDIN>;
@@ -585,12 +585,15 @@ sub capitalize {
    	}
   } elsif ($newword =~ /^.+umavsk.+ Ho.+tice$/){
    $newword = 'Šumavské Hoštice';
-
+ 	} elsif ($newword =~ /Gouy-Lez-Piéton/){
+	 $newword = 'Gouy-lez-Piéton';
+ 	} elsif ($newword =~ /Saint-Josse-Ten-Noode/){
+	 $newword = 'Saint-Josse-ten-Noode';
   #---------------------------------------------------------------------------------------
   # If there are more misspelled names, you have to add them here:
 
   # } elsif ($newword =~ /misspelled name/){
-  # $newword = 'right name';
+  # $newword = 'original name';
     } elsif ($newword =~ /Marchienne-Au-Pont/){
     	$newword = 'Marchienne-au-Pont';
   #---------------------------------------------------------------------------------------
