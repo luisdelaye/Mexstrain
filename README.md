@@ -2,6 +2,7 @@
 -----------
 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
+
 Last update: August 2, 2021.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis focused in a given Country (Figure 1). For instance, we used these scripts to create [Mexstrain](http://www.ira.cinvestav.mx/ncov.evol.mex.aspx).
