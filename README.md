@@ -326,7 +326,7 @@ Now you can go to [Microreact](https://microreact.org/showcase) and upload the o
 If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico), follow the next instructions. You will need to run the script:
 
 ```
-$ perl exstactsecs.pl outfile_subset.tsv alignment.fasta
+$ perl exstractsecs.pl outfile_subset.tsv alignment.fasta
 ```
 
 This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.selected.tsv. Rename this file to outfile_subset.fasta. Then run [iqtree](http://www.iqtree.org) to infer a phylogenetic tree:
