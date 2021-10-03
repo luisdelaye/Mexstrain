@@ -624,6 +624,8 @@ sub capitalize {
     $newword = 'Sao Jose do Brejo do Cruz';
   } elsif ($newword eq 'Torres de Elorz'){
     $newword = 'Torres De Elorz';
+  } elsif ($newword =~ /San Nicolas de los Garza/){
+	 $newword = 'San Nicolas De Los Garza';
   }
   return ($newword);
 }
