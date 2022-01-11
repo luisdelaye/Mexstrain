@@ -135,7 +135,7 @@ while (my $linea = <MIA>){
 	      	print ("names in lowercase...: $mex\n");
 	      	for (my $i = 0; $i <= $#b; $i++){
 	        	if (!exists $hashCo{$b[$i]}){
-	        	  print ("Waring! name not found in $fileCo: '$b[$i]'\n");
+	        	  print ("Warning! name not found in $fileCo: '$b[$i]'\n");
 	        	  $lacking{$b[$i]} = 1;
 	        	  $machy = 1;
 	        	}	
