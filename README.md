@@ -20,12 +20,21 @@ First collect the data. Go to the latest global analysis provided by [Nextstrain
 Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 2 you can see where to find these files in GISAID.
 
 <p align="center">
-  <img width="981" height="810" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-2-Mexstrain.png">
+  <img width="735.75" height="607.5" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-2-Mexstrain.png">
 </p>
-Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID.
+<p style='text-align: right;'> Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID. </p>
 
 
-Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2021_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata'. Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. If this is the case, you will need to run the next script:
+#
+Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2021_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
+
+<p align="center">
+  <img width="736.5" height="596.25" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-3-Mexstrain.png">
+</p>
+<p style='text-align: right;'> Figure 3. Download all the metadata asociated to the country on which you would like to focus your Nexstrain analysis. </p>
+
+
+Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. If this is the case, you will need to run the next script:
 
 ```
 $ perl concatenatetsvfiles.pl gisaid_hcov-19_2021_
