@@ -3,19 +3,27 @@
 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
-Last update: August 2, 2021.
+Last update: January 10, 2022.
 
 The scripts in this repository facilitate the manipulation of data (metadata and fasta sequences) downloaded from GISAID to make a Nextstrain analysis. In particular, the scripts allow to subsample sequences from Nextstrain and GISAID to make a Nextstrain analysis focused in a given Country (Figure 1). For instance, we used these scripts to create [Mexstrain](http://www.ira.cinvestav.mx/ncov.evol.mex.aspx).
 
 <p align="center">
   <img width="720" height="405" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-1-Mexstrain.jpeg">
 </p>
+Figure 1. Mexstrain allows to combine information from Nextstrain and GISAID to make a phylodynamic analysis focused on a single country.
+
 
 ### Collect data
 
 First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'ACKNOWLEDGEMENTS (TSV)'. You will get a file named nextstrain_ncov_gisaid_global_acknowledgements.tsv. 
 
-Next, go to [GISAID](https://www.gisaid.org) and download all fasta sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'.
+Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 2 you can see where to find these files in GISAID.
+
+<p align="center">
+  <img width="981" height="810" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-2-Mexstrain.png">
+</p>
+Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID.
+
 
 Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2021_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata'. Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. If this is the case, you will need to run the next script:
 
