@@ -25,7 +25,7 @@ Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (s
 <p style='text-align: right;'> Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID. </p>
 
 
-Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metadata' associated to the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2022_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
+Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metadata' associated to the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2022\_##\_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
 
 <p align="center">
   <img width="736.5" height="596.25" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-3-Mexstrain.png">
@@ -46,7 +46,7 @@ $ perl concatenatetsvfiles.pl gisaid_hcov-19_2022_
 $ mv outfile.tsv gisaid_hcov-19_2022_##_##.tsv
 ```
 
-Please replace the ##_##_.tsv with an actual date. You may want to run the above script in a separate folder to avoid having an excess of files in your working folder.
+Please replace the \_##\_##.tsv with an actual date. You may want to run the above script in a separate folder to avoid having an excess of files in your working folder (just, don't forget to move to that separate folder all the gisaid_hcov-19_2022_01_11_01_\*.tsv files). 
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -58,7 +58,7 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 
 * spikeprot####.fasta # Spike protein sequences from GISAID
 
-* gisaid_hcov-19_2021_##_##_##.tsv # metadata associated to the genomes of interest from GISAID
+* gisaid_hcov-19_2022\_##\_##.tsv # metadata associated to the genomes of interest from GISAID
 
 The above files must be in the same folder as the Perl scripts you downloaded from Github.
 
