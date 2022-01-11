@@ -17,7 +17,7 @@ Figure 1. Mexstrain allows to combine information from Nextstrain and GISAID to 
 
 First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'ACKNOWLEDGEMENTS (TSV)'. You will get a file named nextstrain_ncov_gisaid_global_acknowledgements.tsv. 
 
-Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 2 you can see where to find these files in GISAID.
+Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 2 you can see where to find these files in GISAID. Don't forget to decompress these files.
 
 <p align="center">
   <img width="735.75" height="607.5" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-2-Mexstrain.png">
@@ -33,7 +33,7 @@ Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metad
 <p style='text-align: right;'> Figure 3. Download all the metadata asociated to the country on which you would like to focus your Nexstrain analysis. </p>
 
 
-Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. In the case of Mexico, we need to download one file for each one of the states (Aguascalientes, Baja California, Baja California Sur, etc.) If you like, you can add the name of the state to each of the files, for example:
+Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. In the case of Mexico, we need to download one file for each one of the states (Aguascalientes, Baja California, Baja California Sur, etc.) If you like, you can add the name of the state to each of the files (avoid spaces or accents in the name of the files), for example:
 
 ```
 $ mv gisaid_hcov-19_2022_01_11_01.tsv gisaid_hcov-19_2022_01_11_01_Aguascalientes.tsv
@@ -46,21 +46,21 @@ $ perl concatenatetsvfiles.pl gisaid_hcov-19_2022_
 $ mv outfile.tsv gisaid_hcov-19_2022_##_##.tsv
 ```
 
-Please replace the \_##\_##.tsv with an actual date. You may want to run the above script in a separate folder to avoid having an excess of files in your working folder (just, don't forget to move to that separate folder all the gisaid_hcov-19_2022_01_11_01_\*.tsv files). 
+Please replace the \_##\_##.tsv with an actual date and move this file to your working directory. Note: you may want to run the above script in a separate directory to avoid having an excess of files in your main working directory (just, don't forget to move to that separate directory all the gisaid_hcov-19_2022_01_11_01_\*.tsv files with the metadata from the states). 
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
-* nextstrain_ncov_global_metadata.tsv # latest global analysis provided by Nextrain
+* nextstrain_ncov_global_metadata.tsv -> latest global analysis provided by Nextrain
 
-* sequences.fasta # fasta genome sequences from GISAID
+* sequences.fasta -> fasta genome sequences downloaded from GISAID
 
-* metadata.tsv # metadata from GISAID
+* metadata.tsv -> metadata downloaded from GISAID
 
-* spikeprot####.fasta # Spike protein sequences from GISAID
+* spikeprot####.fasta -> Spike protein sequences from GISAID
 
-* gisaid_hcov-19_2022\_##\_##.tsv # metadata associated to the genomes of interest from GISAID
+* gisaid_hcov-19_2022\_##\_##.tsv -> metadata downloaded from GISAID associated to the genomes of interest
 
-The above files must be in the same folder as the Perl scripts you downloaded from Github.
+The above files must be in the same directory as the Perl scripts you downloaded from Github.
 
 ### Curate the files containing the names of geographic localities 
 
