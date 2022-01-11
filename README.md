@@ -25,8 +25,7 @@ Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (s
 <p style='text-align: right;'> Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID. </p>
 
 
-#
-Also in [GISAID](https://www.gisaid.org), download all the metadata of the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2021_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
+Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metadata' associated to the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2022_##_##_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
 
 <p align="center">
   <img width="736.5" height="596.25" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-3-Mexstrain.png">
@@ -34,14 +33,20 @@ Also in [GISAID](https://www.gisaid.org), download all the metadata of the genom
 <p style='text-align: right;'> Figure 3. Download all the metadata asociated to the country on which you would like to focus your Nexstrain analysis. </p>
 
 
-Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. If this is the case, you will need to run the next script:
+Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. In the case of Mexico, we need to download one file for each one of the states (Aguascalientes, Baja California, Baja California Sur, etc.) If you like, you can add the name of the state to each of the files, for example:
 
 ```
-$ perl concatenatetsvfiles.pl gisaid_hcov-19_2021_
-$ mv outfile.tsv gisaid_hcov-19_2021_##_##.tsv
+$ mv gisaid_hcov-19_2022_01_11_01.tsv gisaid_hcov-19_2022_01_11_01_Aguascalientes.tsv
 ```
 
-Please replace the ##_##_.tsv with an actual date.
+Just keep the first part of the filename 'gisaid_hcov-19_2022_' and the extension 'tsv'. Next, you will need to run the script:
+
+```
+$ perl concatenatetsvfiles.pl gisaid_hcov-19_2022_
+$ mv outfile.tsv gisaid_hcov-19_2022_##_##.tsv
+```
+
+Please replace the ##_##_.tsv with an actual date. You may want to run the above script in a separate folder to avoid having an excess of files in your working folder.
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -54,6 +59,8 @@ In summary, you will have to download from Nextstrain and GISAID the following f
 * spikeprot####.fasta # Spike protein sequences from GISAID
 
 * gisaid_hcov-19_2021_##_##_##.tsv # metadata associated to the genomes of interest from GISAID
+
+The above files must be in the same folder as the Perl scripts you downloaded from Github.
 
 ### Curate the files containing the names of geographic localities 
 
