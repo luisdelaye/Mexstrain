@@ -46,7 +46,7 @@ $ perl concatenatetsvfiles.pl gisaid_hcov-19_2022_
 $ mv outfile.tsv gisaid_hcov-19_2022_##_##.tsv
 ```
 
-Please replace the \_##\_##.tsv with an actual date and move this file to your working directory. Note: you may want to run the above script in a separate directory to avoid having an excess of files in your main working directory (just, don't forget to move to that separate directory all the gisaid_hcov-19_2022_01_11_01_\*.tsv files with the metadata from the states). 
+Please replace the \_##\_##.tsv with an actual date and move this file to your working directory. Note: you may want to run the above script in a separate directory to avoid having an excess of files in your main working directory (just, don't forget to move to that separate directory all the gisaid_hcov-19_2022_\*.tsv files before running the script). 
 
 In summary, you will have to download from Nextstrain and GISAID the following files:
 
@@ -64,13 +64,13 @@ The above files must be in the same directory as the Perl scripts you downloaded
 
 ### Curate the files containing the names of geographic localities 
 
-We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: region, country, division and location. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to curate this file to be sure that the names between the color_ordering.tsv and metadata.tsv files are the same. For this we use the script curate_names.pl. To run the script write:
+We will asume that you have a local Nexstrain installation. Within the Nexstrain installation, the color_ordering.tsv file contains the names of geographic localities. These names are organized into: region, country, division and location. You can find the color_ordering.tsv file in the directory ncov/defaults/color_ordering.tsv. The first thing to do is to assure that the names of the geographic localities in the metadata.tsv file are also found in the color_ordering.tsv file. For this we use the script curate_names.pl. Make a copy of color_ordering.tsv to your working directory and then run the script:
 
 ```
 $ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico
 ```
 
-In our example data, the first time you run the curate_names.pl script you will get the following output:
+This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen. In our example data, the first time you run the curate_names.pl script you will get the following output:
 
 ```
 No substitute.tsv file provided
