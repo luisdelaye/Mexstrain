@@ -64,9 +64,9 @@ The above files must be in the same directory as the Perl scripts you downloaded
 
 ### Curate the files containing the names of geographic localities 
 
-Now comes the toughest part: to assure that the names of the geographic localities are spelled the same in all files. First, a bit of background. We will asume that you have a local Nextstrain installation. Nextstrain store the name of geographic localities in two files: color_ordering.tsv and lat_longs.tsv. These files live in: ncov/defaults/ wihtin your Nextstrain installation directory. The first file (color_ordering.tsv) is used by Nextstrain to know if a given locality is a 'location', 'division', 'country' or a 'region'; the second file (lat_longs.tsv) keeps the geographic coordinates of all places found in color_ordering.tsv. 
+Now comes the toughest part: to assure that the names of the geographic localities are spelled the same in all files. First, a bit of background. We will asume that you have a local Nextstrain installation. Nextstrain store the name of geographic localities in two files: color_ordering.tsv and lat_longs.tsv. These files live in: ncov/defaults/ wihtin your Nextstrain installation directory. The first file (color_ordering.tsv) is used by Nextstrain to know if a given locality is a 'location', 'division', 'country' or a 'region'; the second file (lat_longs.tsv) keeps the geographic coordinates of all the places found in color_ordering.tsv. 
 
-The names of the geographic localities in color_ordering.tsv and lat_longs.tsv have to match those in metadata.tsv. However, this is not always the case. This is because the names in metadata.tsv are captured by many different people around the world and sometimes these people introduce typos. In addition, the names in metadata.tsv can be in other lenguages different from English and this cause names not to match (for instance, in Spanish the vowels in the names of some geographic localities have accents, like: 'Nuevo León') and most names in color_ordering.tsv are in English. In addition, there can be geographic localities in metadata.tsv that are lacking in color_ordering.tsv and lat_longs.tsv.
+The names of the geographic localities in color_ordering.tsv and lat_longs.tsv have to match those in metadata.tsv. However, this is not always the case because the names in metadata.tsv are captured by many different people around the world and sometimes these people introduce typos. In addition, the names in metadata.tsv can be in other lenguages and most names (but not all!) in color_ordering.tsv are in English. Last but not least, there can be geographic localities in metadata.tsv that are lacking in color_ordering.tsv and lat_longs.tsv. These lacking localities have to be added to color_ordering.tsv and lat_longs.tsv.
 
 To fix the above problem, we can do the following: i) change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv and lat_longs.tsv files; ii) change the names in color_ordering.tsv and lat_longs.tsv files so they match those in metadata.tsv; and/or iii) add new names to color_ordering.tsv and lat_longs.tsv files. At the end, the names have to be spelled correctly and without accents or other characters not found in English. In any case, remember that any given geographic locality (whether it is a 'location', 'division', 'country' or a 'region') has to be identified with only one name.
 
@@ -79,64 +79,64 @@ $ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico
 This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen. In our example data, the first time you run the curate_names.pl script you will get the following output:
 
 ```
+------------------------------------------------------------------------
 No substitute.tsv file provided
+------------------------------------------------------------------------
 
-names in metadata.tsv: North America / Mexico / State of Mexico
-lowercase names......: north america / mexico / state of mexico
-Warning! name not found in color_ordering.original.tsv: 'state of mexico'
+Warning! name not found in color_ordering.tsv: 'State of Mexico'
+context in metadata.tsv: North America / Mexico / State of Mexico
 
-names in metadata.tsv: North America / Mexico / Coahuila de Zaragoza
-lowercase names......: north america / mexico / coahuila de zaragoza
-Warning! name not found in color_ordering.original.tsv: 'coahuila de zaragoza'
+Warning! name not found in color_ordering.tsv: 'Cancun'
+context in metadata.tsv: North America / Mexico / Cancun
 
-names in metadata.tsv: North America / Mexico / State of Mexico / Nicolas Romero
-lowercase names......: north america / mexico / state of mexico / nicolas romero
-Warning! name not found in color_ordering.original.tsv: 'state of mexico'
+Warning! name not found in color_ordering.tsv: 'Cuauhtemoc'
+context in metadata.tsv: North America / Mexico / Chihuahua / Cuauhtemoc
 
-names in metadata.tsv: North America / Mexico / Ciudad de Mexico
-lowercase names......: north america / mexico / ciudad de mexico
-Warning! name not found in color_ordering.original.tsv: 'ciudad de mexico'
+Warning! name not found in color_ordering.tsv: 'Huixtla'
+context in metadata.tsv: North America / Mexico / Chiapas / Huixtla
 
-names in metadata.tsv: North America / Mexico / Jalisco / Puerto Vallarta
-lowercase names......: north america / mexico / jalisco / puerto vallarta
-Warning! name not found in color_ordering.original.tsv: 'puerto vallarta'
+Warning! name not found in color_ordering.tsv: 'Tapachula'
+context in metadata.tsv: North America / Mexico / Chiapas / Tapachula
 
-names in metadata.tsv: North America / Mexico / Jalisco / Zapopan
-lowercase names......: north america / mexico / jalisco / zapopan
-Warning! name not found in color_ordering.original.tsv: 'zapopan'
+Warning! name not found in color_ordering.tsv: 'Acuña'
+context in metadata.tsv: North America / Mexico / Coahuila / Acuña
 
-names in metadata.tsv: North America / Mexico / Yucatán
-lowercase names......: north america / mexico / yucatán
-Warning! name not found in color_ordering.original.tsv: 'yucatán'
+... (many more warnings) ...
 
 ------------------------------------------------------------------------
 The following names don't match any name in the color_ordering.tsv file:
 
-'ciudad de mexico'
-'coahuila de zaragoza'
-'puerto vallarta'
-'state of mexico'
-'yucatán'
-'zapopan'
+'Abasolo Nvo Leon'
+'Acuña'
+'Aguascallientes'
+'Ahualulco'
+'Ajacuba'
+'Altamira'
+'Alvaro Obregon'
+'Apodaca'
+'Asientos'
+
+... (many more names) ...
 
 ------------------------------------------------------------------------
-Provide a substitution.tsv file or add the names to color_ordering.tsv.
+Results are written to outfile.tsv.
 See https://github.com/luisdelaye/Mexstrain/ for more details.
 ------------------------------------------------------------------------
 ```
 
-As you can see, there are several names in metadata.tsv that do not match any in color_ordering.tsv. We recommend you to open the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)) to carefully check why names are different. You will find that sometimes this is because the name in color_ordering.tsv is in Spanish and in metadata.tsv is in English (or viceversa). For instance, the name 'State of Mexico' which is in metadata.tsv, is written in Spanish: 'Estado de Mexico' in color_ordering.tsv. In other occasions the name in metadata.tsv is longer than in color_ordering.tsv. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv, like 'Yucatán' and without accents in color_ordering.tsv. Finally, some names are simply missing in color_ordering.tsv, like 'Zapopan'. By looking at the content of color_ordering.tsv you can identify which names are lacking in this file.
+As you can see, there are several names in metadata.tsv that do not match any in color_ordering.tsv. We recommend you to open the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)) to carefully check why names are different. You will find that sometimes this is because the name in color_ordering.tsv is in Spanish and in metadata.tsv is in English (or viceversa). For instance, the name 'State of Mexico' which is in metadata.tsv, is written in Spanish: 'Estado de Mexico' in color_ordering.tsv. In other occasions the name in metadata.tsv is longer than in color_ordering.tsv. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv, like 'Yucatán' and without accents in color_ordering.tsv. Finally, some names are simply missing in color_ordering.tsv, like 'Zapopan'. 
 
-Therefore, we first are going to change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file. We do this by creating a two column text file (named substitute.tsv) containing the names of the geographic localities to be substituted. In the first column we write the name to be substituted and in the second column we write the new name. The columns must be separated by tabs. Write all names in lowercase. Remember to avoid accents and other characters not found in English. An example of a substitute.tsv file is shown next:
+Therefore, we first are going to change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv file. We do this by creating a two column text file (named substitute.tsv) containing the names of the geographic localities to be substituted. In the first column we write the name to be substituted in metadata.tsv and in the second column we write the new name. The columns must be separated by tabs. Write all names in lowercase (this is important). Don't worry if you see the names in lowercase, we will fix this later on. Remember to avoid accents and other characters not found in English when you write the new name. An example of a substitute.tsv file is shown next:
 
 ```
 state of mexico	estado de mexico
 coahuila de zaragoza	coahuila
 ciudad de mexico	mexico city
-yucat	yucatan
+yucat.{2}n	yucatan
+^acu.{2}a	acuna
 ```
 
-As you can see, we substituted 'state of mexico' by 'estado de mexico' and 'coahuila de zaragoza' by 'coahuila'. It is worth mentioning the case of 'yucatan'. In the color_ordering.tsv file the State is written as 'Yucatan' however in the metadata.tsv is written as 'Yucatán' (with accent in the 'a'). As mentioned above, accentuated vowels must be avoided. Because we use regular expression within the script, to replace the world 'Yucatán' by 'Yucatan' it is enough to write only the first part of the name: 'yucat' and the script will do the rest. 
+As you can see, we substituted 'state of mexico' by 'estado de mexico' and 'coahuila de zaragoza' by 'coahuila'. It is worth mentioning the case of 'yucatan'. In the color_ordering.tsv file the State is written as 'Yucatan' however in the metadata.tsv is written as 'Yucatán' (with accent in the 'a'). As mentioned above, accentuated vowels must be avoided. Therefore, we can use Perl [regular expressions](https://perldoc.perl.org/perlre) to match an accented vowel like this: yucat.{2}n. The regular expression .{2} tels Perl to match any two characters. This matches the vowel á. As a result 'yucatán' will be substituted by 'yucatan'. We also used regular expressions to substitute 'acuña' by 'acuna'. In this case we used the symbol ^. This tells Perl to match the three letters 'acu' at the begining of the name. Perl regular expressions are extremely powerfull, we recommend you to take a look at them.
 
 In addition, open the color_ordering.tsv file with a text editor (like [ATOM](https://atom.io)) and add the name of the localities that are lacking (like 'Zapopan' and 'Puerto Vallarta'). Remember to avoid writting vowels with accents. Add these names with the correct geographic category/label, for instance 'Puerto Vallarta' is a 'location' whithin de 'division' of 'Jalisco'. Therefore you will have to add the following text to color_ordering.tsv:
 
