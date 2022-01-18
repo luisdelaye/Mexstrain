@@ -159,13 +159,55 @@ The last part of the output shows a summary ot the names in metadata.tsv not fou
 
 Now that you have an overview of which names do not match (for any of the above reasons), we are going to proceed to fix them. For this, we will use the script substitute_names.pl and some manual curation. You will need to do the following two things: identify which names are simply lacking in color_ordering.tsv and add them; and identify which names do exist in metadata.tsv but do not match in color_ordering.tsv and modify them. We will show next how to proceed.
 
-Open the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)). Next, take a look at the last part of the output of compare_names.pl (the summary) to fix (one at a time) each one of the names in the list. Lets start with 'Pabello de A'. If you google 'Aguascalientes Pabello de A' you will find that 'Pabello de A' refers to a small city named 'Pabellón de Arteaga' in the State of Aguascalientes. To fix this name, you need to create a text file named 'substitute.tsv'. This file will have three columns separated by tabs. In the first column, write the most immediante, superior geographic category in which the locality with the wrong name is located (i.e. in this case is Aguascalientes). In the second column, write the name to be substituted (in this case 'Pabello de A'). And in the third column write the name that is going to substitute the previous name (in this case 'Pabellon de Arteaga'). The script substitute_names.pl will read this file and will create a new file named outfile.tsv where 'Aguascalientes / Pabello de A' will be substitute by 'aguascalientes / pabellon de arteaga'. Don't bother about lowercase names, this will be fixed later.
+Open the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)). Next, take a look at the last part of the output of compare_names.pl (the summary section). We will fix each one of the names in the list one by one. Lets start with the first one: 'Pabello de A'. If you google 'Aguascalientes Pabello de A' you will find that 'Pabello de A' refers to a small city named 'Pabellón de Arteaga' in the State of Aguascalientes. To fix this name, you need to create a text file named 'substitute.tsv'. This file will have three columns separated by tabs. In the first column, write the most immediante, superior geographic category in which the locality with the wrong name is located (i.e. in this case is Aguascalientes). In the second column, write the name to be substituted (in this case 'Pabello de A'). And in the third column write the name that is going to substitute the previous name (in this case 'Pabellon de Arteaga'). An example of this file is shown bello:
+
+```
+Aguascalientes	Pabello de A	Pabellon de Arteaga
+```
+
+The script substitute_names.pl will read this file and will create a new file named outfile.tsv where 'Aguascalientes / Pabello de A' will be substitute by 'aguascalientes / pabellon de arteaga'. Don't bother about lowercase names, this will be fixed later. You can add as many rows a you like to substitute names in metadata.tsv. These names will appear substituted in outfile.tsv which is an exact copy of metadata.tsv in everithing else. A larger version of substitute.tsv is shown next:
+
+```
+Aguascalientes	Pabello de A	Pabellon de Arteaga
+Coahuila	Acu.{2}a	Acuna
+Coahuila	Castaños	Castanos
+Mexico	Aguascallientes	Aguascalientes
+Yucatan	M.{2}rida	Merida
+Mexico	Yucatán	Yucatan
+Nuevo Leon	Altamira	Altamira Nuevo Leon
+Tamaulipas	Altamira	Altamira Tamaulipas
+```
+
+
+
+Now take a look at the second line in the summary section of the output of compare_names.pl. By looking a color_ordering.tsv you will find that the City of Juarez (in the State of Chihuahua) is simply lacking. The official name of the city is 'Ciudad Juárez' and you will not find it (nor the name without accent: 'Ciudad Juarez') in color_ordering.tsv. In this case, simply add the name 'Ciudad Juarez' to color_ordering.tsv. You will have to add this name in its proper location. For instance, 'Ciudad Juarez' is a 'location' whithin de 'division' of 'Chihuahua'. Therefore you will have to add the following text to color_ordering.tsv:
+
+```
+# Chihuahua
+location	Ciudad Juarez
+```
+
+Because you added a new name to color_ordering.pl, you will have to add this name also to lat_longs.tsv file. Open lat_longs.tsv with a text edditor (like [ATOM](https://atom.io)) and find the correct place to add:
+
+```
+location	Ciudad Juarez	31.73	-106.48
+```
+
+You can find the coordinates from Ciudad Juarez through the Wikipedia page of the city and then clicking on its geographic coordinates: 31°44′18.89″N 106°29′13.25″W. This will take you to a GeoHack page where you can find the coordinates in decimal. You will need to do the same for all names you add to color_ordering.tsv.
+
+
+
+
+
+
+
 
 You will find that sometimes this is because the name in color_ordering.tsv is written in a different lenguage than in metadata.tsv. For instance, in metatada.tsv the name 'State of Mexico' is written in English and in color_ordering.tsv is in Spanish: 'Estado de Mexico'. In other occasions the name in one of the files is the full name of the place. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv (like 'Yucatán') and without accents in color_ordering.tsv. Finally (and very often), some names are simply missing in color_ordering.tsv, like 'Zapopan'. 
 
 Therefore, we first are going to create a new metadata.tsv with new names so they match those of the color_ordering.tsv. We do this by creating a three column text file (named substitute.tsv) containing the names of the geographic localities to be substituted. In the first column we write the next most inclusive geographic location relative to the name to be substituted (see the example). In the second column we write the name to be substituted in metadata.tsv and in the third column we write the new name. The columns must be separated by tabs. Remember to avoid accents and other characters not found in English when you write the new names. An example of a substitute.tsv file is shown next:
 
 ```
+Aguascalientes	Pabello de A	Pabellon de Arteaga
 Nuevo Leon	Abasolo Nvo Leon	Abasolo
 Coahuila	Acu.{2}a	Acuna
 Mexico	Aguascallientes	Aguascalientes
