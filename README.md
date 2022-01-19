@@ -68,9 +68,9 @@ Now comes the toughest part: to assure that the names of the geographic localiti
 
 The names of the geographic localities in color_ordering.tsv and lat_longs.tsv have to match those in metadata.tsv. However, this is not always the case because the names in metadata.tsv are captured by many different people around the world and sometimes these people introduce typos. In addition, the names in metadata.tsv can be in other lenguages and most names (but not all!) in color_ordering.tsv are in English. Last but not least, there can be geographic localities in metadata.tsv that are lacking in color_ordering.tsv and lat_longs.tsv. These lacking localities have to be added to color_ordering.tsv and lat_longs.tsv.
 
-To fix the above problem, we can do the following: i) change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv and lat_longs.tsv files; ii) change the names in color_ordering.tsv and lat_longs.tsv files so they match those in metadata.tsv; and/or iii) add new names to color_ordering.tsv and lat_longs.tsv files. At the end, keep in mind that the names have to be spelled correctly. We also suggest that the names are written without accents or other characters not found in English. Remember also that any given geographic locality (whether it is a 'location', 'division', 'country' or a 'region') has to be identified with only one name.
+To fix the above problem, you can do the following: i) change the names of the geographic localities in the metadata.tsv file so they match those of the color_ordering.tsv and lat_longs.tsv files; ii) change the names in color_ordering.tsv and lat_longs.tsv files so they match those in metadata.tsv; and/or iii) add those extra names in metadata.tsv to color_ordering.tsv and lat_longs.tsv files. At the end, all names from geographic localities in metadata.tsv have to be also in color_ordering.tsv and lat_longs.tsv and every name from a geographic locality in metadata.tsv has to be associated to a geographic coordinate in lat_longs.tsv.
 
-The first thing to do is to check whether the names of the geographic localities in metadata.tsv are also found in color_ordering.tsv. We will do this specifically for the names of the country on which you would like to focus your Nextstrain analysis (in this case: Mexico). For this we use the script compare_names.pl. We recommend you to make security copies of the original color_ordering.tsv and lat_longs.tsv files (in case you would like to recover the original files) and then make a copy of color_ordering.tsv to your working directory. Then run the script:
+Therefore, the first thing to do is to check whether the names of the geographic localities in metadata.tsv are also found in color_ordering.tsv. We will do this specifically for the names of the country on which you would like to focus your Nextstrain analysis (in this case: Mexico). For this we use the script compare_names.pl. We recommend you to make security copies of the original color_ordering.tsv and lat_longs.tsv files (in case you would like to recover the original files) and then make a copy of color_ordering.tsv to your working directory. Then run the script:
 
 ```
 $ perl compare_names.pl color_ordering.tsv metadata.tsv Mexico
@@ -79,6 +79,9 @@ $ perl compare_names.pl color_ordering.tsv metadata.tsv Mexico
 This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen. This script will also check whether the same name is repeated whithin different geographic contexts (note that this may not be an error by itself). In our example data, the first time you run the curate_names.pl script you will get the following output:
 
 ```
+------------------------------------------------------------------------
+Part 1
+Are there are names in metadata.tsv lacking in color_ordering.tsv?
 
 Warning! name not found in color_ordering.tsv: 'State of Mexico'
 context in metadata.tsv: North America / Mexico / State of Mexico
@@ -101,6 +104,7 @@ context in metadata.tsv: North America / Mexico / Coahuila / Acuña
 ... (many more warnings) ...
 
 ------------------------------------------------------------------------
+Part 2
 Checking if the same name is repeated in different geographic contexts
 
 Warning! the name Aguascalientes is in more than one geographic context:
@@ -123,6 +127,7 @@ North America / Mexico / Campeche
 ... (many more warnings) ...
 
 ------------------------------------------------------------------------
+Part 3 - summary
 The following names don't match any name in the color_ordering.tsv file:
 
 'Aguascalientes / Pabello de A'
