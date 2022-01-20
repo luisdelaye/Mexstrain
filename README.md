@@ -212,7 +212,7 @@ As you can see, with this version of substitute.tsv we substituted 'Vallarta' by
 
 Now take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. As you remember, this was indicated in the second part of the compare_names.pl output (see above). Therefore we will tell substitute_names.pl to substitute 'Nuevo Leon / Altamira' by 'Nuevo Leon / Altamira Nuevo Leon' and the other by 'Tamaulipas / Altamira Tamaulipas'. In this case, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
 
-Now we are going to fix another name. 
+Now we are going to fix another name. As you can see in the second part of compare_names.pl output, the city of 'Tecate' is in more than one geographic context. Since there is no city of 'Tecate' in the State of 'Baja California Sur' this is clearly a mistake.
 
 
 
