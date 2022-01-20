@@ -1,6 +1,8 @@
 # Mexstrain
 -----------
 
+# We are updating the scripts, please do not use them until this message disappears!
+
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
 Last update: January 10, 2022.
@@ -124,6 +126,10 @@ Warning! the name Campeche is in more than one geographic context:
 North America / Mexico
 North America / Mexico / Campeche
 
+Warning! the name tecate is in more than one geographic context:
+north america / mexico / baja california
+north america / mexico / baja california sur
+
 ... (many more warnings) ...
 
 ------------------------------------------------------------------------
@@ -206,10 +212,14 @@ As you can see, with this version of substitute.tsv we substituted 'Vallarta' by
 
 Now take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. As you remember, this was indicated in the second part of the compare_names.pl output (see above). Therefore we will tell substitute_names.pl to substitute 'Nuevo Leon / Altamira' by 'Nuevo Leon / Altamira Nuevo Leon' and the other by 'Tamaulipas / Altamira Tamaulipas'. In this case, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
 
+Now we are going to fix another name. 
+
 
 
 
 #-----
+
+Recapitulating. You have the following tools to correct the names in metadata.tsv.
 
 You will find that there are many reasons why the names in metadata.tsv do not match those of color_ordering.tsv and lat_longs.tsv. For instance, in metatada.tsv the name 'State of Mexico' is written in English and in color_ordering.tsv is in Spanish: 'Estado de Mexico'. In other occasions the name in one of the files is the full name of the place. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv (like 'Yucatán') and without accents in color_ordering.tsv. Finally (and very often), some names are simply missing in color_ordering.tsv, like 'Zapopan' or 'Ciudad Juarez'. In any case, you will have to study each one and decide the best way to fix the problem. 
 
