@@ -200,80 +200,38 @@ Now we will fix another name. In some occasions the geographic locality is in me
 'Pabello de A'  'North America / Mexico / Aguascalientes / Pabello de A'  'North America / Mexico / Aguascalientes / Pabellon de Arteaga'
 ```
 
-You will do the same for all the names you would like to modify in the metadata. The script substitute_names.pl will read this file and will create a new file named outfile.tsv in which the data in the second column will be substituted by the data in the third column. In addition to the above, check if 'Pabellon de Arteaga' is in color_ordering.tsv. If not, you will have to add this name to color_ordering.tsv and lat_longs.tsv as described above.
+You will do the same for all the names you would like to modify in the metadata. The script substitute_names.pl will read this file and will create a new file named outfile.tsv in which the data in the second column will be substituted by the data in the third column. The file outfile.tsv will be identical to metadata.tsv in everithing else. In addition to the above, check if 'Pabellon de Arteaga' is in color_ordering.tsv. If not, you will have to add this name to color_ordering.tsv and lat_longs.tsv as described above. One final thing, you do not need to erase those rows that have the same data in the second and third column, the script will ignore them.
 
-#-----
+Now we will review the second part of the output of compare_names.pl Take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. Because of this, we will have to change the name of the cities to differentiate one from the other. One possibility is to name the cities as 'Altamira Nuevo Leon' and 'Atlamira Tamaulipas'. Use the file substitute_proposal.tsv as explained before. In addition, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
 
-
-The script substitute_names.pl will read this file and will create a new file named outfile.tsv where 'Aguascalientes / Pabello de A' will be substitute by 'aguascalientes / pabellon de arteaga'. Don't bother about lowercase names, this will be fixed later. Then, you have to add 'Pabellon de Arteaga' to color_ordering.tsv and to lat_longs.tsv. Remember, when you modify a name of metadata.tsv you have to check if the new modified name exists in color_ordering.tsv and (lat_longs.tsv). If the new name does not exist in these files, you will have to add them.
-
-
-You can add as many rows a you like to substitute.tsv. These names will appear substituted in outfile.tsv which is an exact copy of metadata.tsv in everithing else. A larger version of substitute.tsv is shown next:
-
-```
-Aguascalientes	Pabello de A	Pabellon de Arteaga
-Coahuila	Acu.{2}a	Acuna
-Coahuila	Castaños	Castanos
-Jalisco	Vallarta	Puerto Vallarta
-Mexico	Aguascallientes	Aguascalientes
-Yucatan	M.{2}rida	Merida
-Mexico	Yucatán	Yucatan
-Nuevo Leon	Altamira	Altamira Nuevo Leon
-Tamaulipas	Altamira	Altamira Tamaulipas
-```
-
+#-
 As you can see, with this version of substitute.tsv we substituted 'Vallarta' by 'Puerto Vallarta' and 'Aguascallientes' by 'Aguascalientes' (among others). As you can see, we also changed those names with accents or with the letter ñ. For instance see the case of 'Yucatan'. In color_ordering.tsv the State is written as 'Yucatan' (without accent) while in metadata.tsv is written as 'Yucatán' (with accent). Alternatively, you can use Perl [regular expressions](https://perldoc.perl.org/perlre) to substitute names with accents. For instance, to match an accented vowel with Perl regular expressions do it like this: M.{2}rida. The regular expression .{2} tels Perl to match any two characters; this matches the vowel é (because it is composed by the letter e + the accent). As a result 'Mérida' will be substituted by 'Merida'. We also used regular expressions to substitute 'Acuña' by 'Acuna' (to match the letter ñ we also need tell Perl to match any two characters .{2}). Perl regular expressions are extremely powerfull, we recommend you to take a look at them. As indicated above, add the new names to color_ordering.tsv and lat_longs.tsv if necesary.
-
-Now take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. As you remember, this was indicated in the second part of the compare_names.pl output (see above). Therefore we will tell substitute_names.pl to substitute 'Nuevo Leon / Altamira' by 'Nuevo Leon / Altamira Nuevo Leon' and the other by 'Tamaulipas / Altamira Tamaulipas'. In this case, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
-
-Now we are going to fix another name. As you can see in the second part of compare_names.pl output, the city of 'Tecate' is in more than one geographic context. Since there is no city of 'Tecate' in the State of 'Baja California Sur' this is clearly a mistake.
-
-
-
-
-#-----
-
-Recapitulating. You have the following tools to correct the names in metadata.tsv.
-
 You will find that there are many reasons why the names in metadata.tsv do not match those of color_ordering.tsv and lat_longs.tsv. For instance, in metatada.tsv the name 'State of Mexico' is written in English and in color_ordering.tsv is in Spanish: 'Estado de Mexico'. In other occasions the name in one of the files is the full name of the place. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv (like 'Yucatán') and without accents in color_ordering.tsv. Finally (and very often), some names are simply missing in color_ordering.tsv, like 'Zapopan' or 'Ciudad Juarez'. In any case, you will have to study each one and decide the best way to fix the problem. 
+#-
 
-Once you have finished adding the lacking names to color_ordering.tsv (and to lat_longs.tsv) and identifying all names that need to be substituted in substitute.tsv (and if necessary adding these new names to color_ordering.tsv and lat_longs.tsv), the run the script:
-
-```
-$ perl substitute_names.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
-```
-
-This script will output the file: outfile.tsv. This file is an exact copy of metadata.tsv except for those names that were substituted.
-
------
-
-
-
-Next, run the script again to see if there are no more mismatches:
+Once you have finished adding the lacking names to color_ordering.tsv (and to lat_longs.tsv) and identifying all names that need to be substituted in substitute_proposal.tsv (and if necessary adding these new names to color_ordering.tsv and lat_longs.tsv), the run the script:
 
 ```
-$ perl curate_names.pl color_ordering.tsv metadata.tsv Mexico substitute.tsv
+$ perl substitute_names.pl color_ordering.tsv metadata.tsv Mexico substitute_proposal.tsv
+```
+
+As mentioned above, this script will output the file: outfile.tsv. This file is an exact copy of metadata.tsv except for those names that were substituted.
+
+Next, run the script curate_names.pl again, but now on outfile.tsv to see if there are no more mismatches (beware that this script will generate a new substitute_proposal.tsv file if there are mismatches):
+
+```
+$ perl curate_names.pl color_ordering.tsv outfile.tsv Mexico
 ```
 
 If there are no more mismatches you should get the following ouptup:
 
 ```
-All names in metadata.tsv have a match in color_ordering.tsv
+------------------------------------------------------------------------
+All names in outfile.tsv have a match in color_ordering.tsv
+See https://github.com/luisdelaye/Mexstrain/ for more details.
+------------------------------------------------------------------------
 ```
-
-Finally, because you added two new localities and changed the names of four divisions in the color_ordering.tsv file, you have to make the same changes to the lat_longs.tsv file within Nextstrain. You can find this file within: ncov/defaults/lat_longs.tsv. Next we show these names within the lat_longs.tsv file:
-
-```
-division	Coahuila	27.302222	-102.044722
-division	Estado de Mexico	19.354167	-99.630833
-division	Mexico City	19.419444	-99.145556
-division	Yucatan	20.833333	-89
-
-location	Puerto Vallarta	20.617	-105.23018
-location	Zapopan	20.720278	-103.391944
-```
-
-The curate_names.pl script will output a file named outfile.tsv. This file is the new metadata. It contains the new geographic names, all in lowercase. Change the name of this file:
+Now change the name of outfile.tsv to:
 
 ```
 $ mv outfile.tsv metadata.e1.tsv
