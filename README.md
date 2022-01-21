@@ -66,7 +66,7 @@ The above files must be in the same directory as the Perl scripts you downloaded
 
 ### Curate the files containing the names of geographic localities 
 
-Now comes the toughest part: to assure that the names of the geographic localities are spelled the same in all files. First, a bit of background. We will asume that you have a local Nextstrain installation. Nextstrain store the name of geographic localities in two files: color_ordering.tsv and lat_longs.tsv. These files live in: ncov/defaults/ wihtin your Nextstrain installation directory. The first file (color_ordering.tsv) is used by Nextstrain to know if a given locality is a 'location', 'division', 'country' or a 'region'; the second file (lat_longs.tsv) keeps the geographic coordinates of all the places found in color_ordering.tsv. These files were prepared by the people from Nextstrain and share the same geographic localities. 
+Now comes the toughest part: to assure that the names of the geographic localities are spelled the same in all files. First, a bit of background. We will asume that you have a local Nextstrain installation. Nextstrain store the name of geographic localities in two files: color_ordering.tsv and lat_longs.tsv. These files live in: ncov/defaults/ wihtin your Nextstrain installation directory. The first file (color_ordering.tsv) is used by Nextstrain to know if a given locality is a 'region', 'country', 'division' or a 'location'; the second file (lat_longs.tsv) keeps the geographic coordinates of all the places found in color_ordering.tsv. These files were prepared by the people from Nextstrain and share the same geographic localities. 
 
 The names of the geographic localities in color_ordering.tsv and lat_longs.tsv have to match those in metadata.tsv. However, this is not always the case because the names in metadata.tsv are captured by many different people around the world and sometimes these people introduce typos. In addition, the names in metadata.tsv can be in diverse lenguages while in color_ordering.tsv most names (but not all!) are in English. In addition, there can be geographic localities in metadata.tsv that are lacking in color_ordering.tsv and lat_longs.tsv. These lacking localities have to be added to color_ordering.tsv and lat_longs.tsv.
 
@@ -78,7 +78,7 @@ Therefore, the first thing to do is to check whether the names of the geographic
 $ perl compare_names.pl color_ordering.tsv metadata.tsv Mexico
 ```
 
-This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen (Part 1 of the output). This script will also check whether the same name is repeated whithin different geographic contexts (Part 2). We will see later that this may not be an error by itself. And finally, it will make a summary (Part 3). In our example data, the first time you run the compare_names.pl script you will get the following output:
+This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen (Part 1 of the output). This script will also check whether the same name is repeated whithin different geographic contexts (Part 2). We will see later that this may not be an error by itself. In our example data, the first time you run the compare_names.pl script you will get the following output:
 
 ```
 ------------------------------------------------------------------------
@@ -109,52 +109,36 @@ context in metadata.tsv: North America / Mexico / Coahuila / Acuña
 Part 2
 Checking if the same name is repeated in different geographic contexts
 
-Warning! the name Aguascalientes is in more than one geographic context:
-North America / Mexico
-North America / Mexico / Aguascalientes
-North America / Mexico / Aguascallientes
+Warning! the name 'Aguascalientes' is in more than one geographic context:
+North America / Mexico / 'Aguascalientes'
+North America / Mexico / Aguascalientes / 'Aguascalientes'
+North America / Mexico / Aguascallientes / 'Aguascalientes'
 
-Warning! the name Altamira is in more than one geographic context:
-North America / Mexico / Nuevo Leon
-North America / Mexico / Tamaulipas
+Warning! the name 'Altamira' is in more than one geographic context:
+North America / Mexico / Nuevo Leon / 'Altamira'
+North America / Mexico / Tamaulipas / 'Altamira'
 
-Warning! the name Baja California is in more than one geographic context:
-North America / Mexico
-North America / Mexico / Chiapas
+Warning! the name 'Baja California' is in more than one geographic context:
+North America / Mexico / 'Baja California'
+North America / Mexico / Chiapas / 'Baja California'
 
-Warning! the name Campeche is in more than one geographic context:
-North America / Mexico
-North America / Mexico / Campeche
+Warning! the name 'Campeche' is in more than one geographic context:
+North America / Mexico / 'Campeche'
+North America / Mexico / Campeche / 'Campeche'
 
-Warning! the name tecate is in more than one geographic context:
-north america / mexico / baja california
-north america / mexico / baja california sur
+Warning! the name 'Tecate' is in more than one geographic context:
+North America / Mexico / Baja California / 'Tecate'
+North America / Mexico / Baja California Sur / 'Tecate'
+
+Warning! the name 'Veracruz' is in more than one geographic context:
+North America / Mexico / 'Veracruz'
+North America / Mexico / Veracruz / 'Veracruz'
+
+Warning! the name 'Zacatecas' is in more than one geographic context:
+North America / Mexico / 'Zacatecas'
+North America / Mexico / Zacatecas / 'Zacatecas'
 
 ... (many more warnings) ...
-
-------------------------------------------------------------------------
-Part 3 - summary
-The following names don't match any name in the color_ordering.tsv file:
-
-'Aguascalientes / Pabello de A'
-'Chihuahua / Juarez'
-'Coahuila / Acuña'
-'Coahuila / Castaños'
-'Hidalgo / Cardonal Hgo'
-'Hidalgo / El Arenal'
-'Jalisco / Guadalajara Tetlan'
-'Jalisco / Tlajomulco De Zuñiga'
-'Jalisco / Vallarta'
-'Mexico / Aguascallientes'
-'Mexico / CDMX'
-'Mexico / CMX'
-'Mexico / Ciudad de Mexico'
-'Mexico / Coahuila de Zaragoza'
-
-... (many more names) ...
-
-'Zacatecas / Rio Grande'
-'Zacatecas / Sombrerete'
 
 ------------------------------------------------------------------------
 Now run substitute_names.pl.
