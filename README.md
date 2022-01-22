@@ -175,7 +175,7 @@ In addition to the above output, compare_names.pl output a text file named subst
 
 ```
 
-The first column shows the metadata.tsv name that is lacking in color_ordering.tsv, the second columns shows the geographical context of the name and the third column shows again the geographical context of the name. Each column is separated by a tab. We will use this file to create a new metadata file where all names are in color_ordering.tsv.
+The first column shows the metadata.tsv name that is lacking in color_ordering.tsv, the second column shows the geographical context of the name and the third column shows again the geographical context of the name. Each column is separated by a tab. We will use this file to create a new metadata file where all names are in color_ordering.tsv.
 
 Now that you have an overview of which names do not match (for any of the above and many other reasons), we are going to proceed to fix them. For this, we will use the script substitute_names.pl and some manual curation. You will need to do the following two things: identify which names are simply lacking in color_ordering.tsv and add them to this file (and to lat_longs.tsv, see below); and identify which names do exist in metadata.tsv and color_ordering.tsv (and lat_longs.tsv) but do not match exactly. In this last case, you will need to modify these names. We will show next how to proceed with several examples.
 
@@ -212,7 +212,7 @@ You will find that there are many reasons why the names in metadata.tsv do not m
 Once you have finished adding the lacking names to color_ordering.tsv (and to lat_longs.tsv) and identifying all names that need to be substituted in substitute_proposal.tsv (and if necessary adding these new names to color_ordering.tsv and lat_longs.tsv), the run the script:
 
 ```
-$ perl substitute_names.pl color_ordering.tsv metadata.tsv Mexico substitute_proposal.tsv
+$ perl substitute_names.pl color_ordering.tsv metadata.tsv substitute_proposal.tsv
 ```
 
 As mentioned above, this script will output the file: outfile.tsv. This file is an exact copy of metadata.tsv except for those names that were substituted.
@@ -220,7 +220,7 @@ As mentioned above, this script will output the file: outfile.tsv. This file is 
 Next, run the script curate_names.pl again, but now on outfile.tsv to see if there are no more mismatches (beware that this script will generate a new substitute_proposal.tsv file if there are mismatches):
 
 ```
-$ perl curate_names.pl color_ordering.tsv outfile.tsv Mexico
+$ perl compare_names.pl color_ordering.tsv outfile.tsv Mexico
 ```
 
 If there are no more mismatches you should get the following ouptup:
@@ -231,6 +231,7 @@ All names in outfile.tsv have a match in color_ordering.tsv
 See https://github.com/luisdelaye/Mexstrain/ for more details.
 ------------------------------------------------------------------------
 ```
+
 Now change the name of outfile.tsv to:
 
 ```
