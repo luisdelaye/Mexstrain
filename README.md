@@ -152,11 +152,15 @@ See https://github.com/luisdelaye/Mexstrain/ for more details.
 ------------------------------------------------------------------------
 ```
 
-As mentioned above, the output has two sections. The first part, shows if there is a name in metadata.tsv that is not found in color_ordering.tsv. The warning shows the lacking name together with its geographical context. For instance, the name 'Huixtla' is lacking in color_ordering.tsv and its geographical context whitin metadata.tsv is: 'North America / Mexico / Chiapas / Huixtla'. It is important to understand that whithin metadata.tsv the names of the geographic localities are organized in the following way: 'region / country / division / location'. In this case 'Huixtla' is a 'location'. Not all entries in metadata.tsv have the four categories, some of them have only 'region / country / division ' or fewer.
+As mentioned above, the output has two sections. The first part, shows if there is a name in metadata.tsv that is not found in color_ordering.tsv. The warning shows the lacking name together with its geographical context. For instance, the name 'Huixtla' is lacking in color_ordering.tsv and its geographical context whitin metadata.tsv is: 'North America / Mexico / Chiapas / Huixtla'. It is important to understand that whithin metadata.tsv the names of the geographic localities are organized in the following way: 'region / country / division / location'. Not all entries in metadata.tsv have the four categories, some of them have only 'region / country / division ' or fewer. In this case 'Huixtla' is a 'location'.
 
-The second part of the output shows whether there are names repeated within differen geographical contexts. Note that this may not be an error by itself since it is common to find localities sharing the same name. For instance, see the case of 'Campeche' which can refer to the State of Campeche or to the City of Campeche. By the way, the true name of the State of Campeche is: 'Estado Libre y Soberano de Campeche' and the true name of the City of Campeche is: 'San Francisco de Campeche'. But for short, people uses Campeche for both. In cases like this, it is not necesary to change the names in metadata.tsv. Now see the case of 'Altamira' which is in the states of 'Nuevo Leon' and 'Tamaulipas'. This is a problem because each name has to be associated with a single geographic coordinate in lat_longs.tsv. To fix this, we will have to asign different names to the cities of 'Altamira' from 'Nuevo Leon' and from 'Tamaulipas' (for example, we can change the names to: 'Altamira Nuevo Leon' and 'Altamira Tamaulipas'). In addition to the above, you may get some surprises. For instance, you may think that it is a mistake that 'Baja California' is a 'location' within the state of 'Chiapas', however it is not. There is in fact a town named 'Baja California' in the State of 'Chiapas' (you can chech this if you google: Baja California Chiapas). Finally see the case of 'Aguascalientes' (the city) wich is in two geographical contexts, in one the State of 'Aguascalientes' is spelled correctly: 'North America / Mexico / Aguascalientes' and in the other it has a typo: 'North America / Mexico / Aguascallientes'. We will see how to fixt the above problems soon.
+The second part of the output shows whether there are names repeated within differen geographical contexts. Note that this may not be an error by itself since it is common to find localities sharing the same name. For instance, see the case of 'Campeche' which can refer to the State of Campeche or to the City of Campeche. By the way, the true name of the State of Campeche is: 'Estado Libre y Soberano de Campeche' and the true name of the City of Campeche is: 'San Francisco de Campeche'. But for short, people uses Campeche for both. In cases like this, it is not necesary to change the names in metadata.tsv. 
 
-In addition to the above output, compare_names.pl output a text file named substitute_proposal.tsv that contains three columns (example):
+Now see the case of 'Altamira' (also in the second part of the output) which is in the states of 'Nuevo Leon' and 'Tamaulipas'. This is a problem because each name has to be associated with a single geographic coordinate in lat_longs.tsv. To fix this, we will have to asign different names to the cities of 'Altamira' from 'Nuevo Leon' and from 'Tamaulipas' (for example, we can change the names to: 'Altamira Nuevo Leon' and 'Altamira Tamaulipas'). 
+
+In addition to the above, you may get some surprises. For instance, you may think that it is a mistake that 'Baja California' is a 'location' within the state of 'Chiapas', however it is not. There is in fact a town named 'Baja California' in the State of 'Chiapas' (you can chech this if you google: Baja California Chiapas). Finally see the case of 'Aguascalientes' (the city) wich is in two geographical contexts, in one the State of 'Aguascalientes' is spelled correctly: 'North America / Mexico / Aguascalientes' and in the other it has a typo: 'North America / Mexico / Aguascallientes'. We will see how to fixt the above problems soon.
+
+In addition to the above, compare_names.pl creates a text file named substitute_proposal.tsv that contains three columns separated by tabs:
 
 ```
 'Asientos'  'North America / Mexico / Aguascalientes / Asientos'  'North America / Mexico / Aguascalientes / Asientos'
@@ -175,39 +179,34 @@ In addition to the above output, compare_names.pl output a text file named subst
 
 ```
 
-The first column shows the metadata.tsv name that is lacking in color_ordering.tsv, the second column shows the geographical context of the name and the third column shows again the geographical context of the name. Each column is separated by a tab. We will use this file to create a new metadata file where all names are in color_ordering.tsv.
+The first column shows the metadata.tsv name that is lacking in color_ordering.tsv; the second column shows the geographical context of the name; and the third column shows again the geographical context of the name. Each column is separated by a tab. We will use this file to create a new metadata file where all names from geographic localities match those of color_ordering.tsv.
 
 Now that you have an overview of which names do not match (for any of the above and many other reasons), we are going to proceed to fix them. For this, we will use the script substitute_names.pl and some manual curation. You will need to do the following two things: identify which names are simply lacking in color_ordering.tsv and add them to this file (and to lat_longs.tsv, see below); and identify which names do exist in metadata.tsv and color_ordering.tsv (and lat_longs.tsv) but do not match exactly. In this last case, you will need to modify these names. We will show next how to proceed with several examples.
 
-We will begin by adding to color_ordering.tsv (and lat_longs.tsv) those extra names that are found in metadata.tsv. Start by opening the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)). Then, take a look at the first part of the output from compare_names.pl. We will start by analysing 'Chihuahua / Juarez'. By looking at color_ordering.tsv you will find that the City of 'Juarez' (in the State of 'Chihuahua') is simply lacking. The official name of the city is 'Ciudad Juárez' and you will not find it (nor the name without accent: 'Ciudad Juarez') in color_ordering.tsv. In this case, simply add the name 'Ciudad Juarez' to color_ordering.tsv. You will have to add this name in its proper location. For instance, 'Ciudad Juarez' is a 'location' whithin de 'division' of 'Chihuahua'. Therefore you will have to add the following text to color_ordering.tsv:
+We will begin by adding to color_ordering.tsv (and lat_longs.tsv) those extra names that are found in metadata.tsv. Start by opening the color_ordering.tsv file with a text edditor (like [ATOM](https://atom.io)). Then, take a look at the first part of the output from compare_names.pl. We will start by analysing 'Huixtla'. By looking at color_ordering.tsv you will find that the location of 'Huixtla' is simply lacking. In this case, simply add the name 'Huixtla' to color_ordering.tsv. You will have to add this name in its proper location. For instance, 'Huixtla' is a 'location' whithin de 'division' of 'Chiapas'. Therefore you will have to add the following text to color_ordering.tsv:
 
 ```
-# Chihuahua
-location	Ciudad Juarez
+# Chiapas
+location	Huixtla
 ```
 
-Because you added a new name to color_ordering.pl, you will have to add this name also to lat_longs.tsv file. Open lat_longs.tsv with a text edditor (like [ATOM](https://atom.io)) and find the correct place (names are in alphabetical order) to add:
+Note that there is a tab between the word 'location' and 'Huixtla'. Because you added a new name to color_ordering.pl, you will have to add this name also to lat_longs.tsv file. Open lat_longs.tsv with a text edditor (like [ATOM](https://atom.io)) and find the correct place (names are in alphabetical order) to add:
 
 ```
-location	Ciudad Juarez	31.73	-106.48
+location	Huixtla	15.13	-92.46
 ```
 
-You can find the coordinates from Ciudad Juarez through its [Wikipedia](https://es.wikipedia.org/wiki/Ciudad_Juárez) page of the city and then clicking on its geographic coordinates: [31°44′18.89″N 106°29′13.25″W](https://geohack.toolforge.org/geohack.php?language=es&pagename=Ciudad_Juárez&params=31.739444444444_N_-106.48694444444_E_type:city). This will take you to a GeoHack page where you can find the coordinates in decimal. You will need to do the same for all names you add to color_ordering.tsv. 
+Note that the fields are separated by tabs. You can find the coordinates from 'Huixtla' through its [Wikipedia](https://es.wikipedia.org/wiki/Huixtla) page of the city and then clicking on its geographic coordinates: [15°08′00″N 92°28′00″O](https://geohack.toolforge.org/geohack.php?language=es&pagename=Huixtla&params=15.133333333333_N_-92.466666666667_E_type:city). This will take you to a GeoHack page where you can find the coordinates in decimal. You will need to do the same for all names you add to color_ordering.tsv. 
 
-Now we will fix another name. In some occasions the geographic locality is in metadata.tsv and in color_ordering.tsv (and in lat_longs.tsv), but it is written in a different language or the name in metadata.tsv has some typos. Lets take a look at: 'Aguascalientes / Pabello de A'. If you google 'Aguascalientes Pabello de A' you will find that 'Pabello de A' refers to a small city named 'Pabellón de Arteaga' in the State of 'Aguascalientes'. Therefore, you have to substitute 'Pabello de A' by 'Pabellon de Arteaga' in metadata.tsv. To do this, open the file substitute_proposal.tsv with a text editor (like [ATOM](https://atom.io)) and find the row containing 'Pabello de A'. Then substitute 'Pabello de A' by 'Pabellon de Arteaga' in the third column (do not remove the single quotes nor the spaces between the /). Example:
+Now we will fix another name. In some occasions the geographic locality is in metadata.tsv and in color_ordering.tsv (and in lat_longs.tsv), but it is written in a different language or the name in metadata.tsv has some typos. Lets take a look at: 'Aguascalientes / Pabello de A'. If you google 'Aguascalientes Pabello de A' you will find that 'Pabello de A' refers to a small city named 'Pabellón de Arteaga' in the State of 'Aguascalientes'. Therefore, you have to substitute 'Pabello de A' by 'Pabellon de Arteaga' in metadata.tsv. To do this, open the file substitute_proposal.tsv with a text editor (like [ATOM](https://atom.io)) and find the row containing 'Pabello de A'. Then substitute 'Pabello de A' by 'Pabellon de Arteaga' in the third column (do not remove the single quotes nor the spaces between the slashes /). Example:
 
 ```
 'Pabello de A'  'North America / Mexico / Aguascalientes / Pabello de A'  'North America / Mexico / Aguascalientes / Pabellon de Arteaga'
 ```
 
-You will do the same for all the names you would like to modify in the metadata. The script substitute_names.pl will read this file and will create a new file named outfile.tsv in which the data in the second column will be substituted by the data in the third column. The file outfile.tsv will be identical to metadata.tsv in everithing else. In addition to the above, check if 'Pabellon de Arteaga' is in color_ordering.tsv. If not, you will have to add this name to color_ordering.tsv and lat_longs.tsv as described above. One final thing, you do not need to erase those rows that have the same data in the second and third column, the script will ignore them.
+The script substitute_names.pl will read this file and will create a new file named outfile.tsv in which the data in the second column will be substituted by the data in the third column. The file outfile.tsv will be identical to metadata.tsv in everithing else. In addition to the above, check if 'Pabellon de Arteaga' is in color_ordering.tsv. If not, you will have to add this name to color_ordering.tsv and lat_longs.tsv as described above. You will do the same for all the names you would like to modify in the metadata. One final thing, you do not need to erase those rows that have the same data in the second and third column, the script will ignore them. 
 
-Now we will review the second part of the output of compare_names.pl Take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. Because of this, we will have to change the name of the cities to differentiate one from the other. One possibility is to name the cities as 'Altamira Nuevo Leon' and 'Atlamira Tamaulipas'. Use the file substitute_proposal.tsv as explained before. In addition, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
-
-#-
-As you can see, with this version of substitute.tsv we substituted 'Vallarta' by 'Puerto Vallarta' and 'Aguascallientes' by 'Aguascalientes' (among others). As you can see, we also changed those names with accents or with the letter ñ. For instance see the case of 'Yucatan'. In color_ordering.tsv the State is written as 'Yucatan' (without accent) while in metadata.tsv is written as 'Yucatán' (with accent). Alternatively, you can use Perl [regular expressions](https://perldoc.perl.org/perlre) to substitute names with accents. For instance, to match an accented vowel with Perl regular expressions do it like this: M.{2}rida. The regular expression .{2} tels Perl to match any two characters; this matches the vowel é (because it is composed by the letter e + the accent). As a result 'Mérida' will be substituted by 'Merida'. We also used regular expressions to substitute 'Acuña' by 'Acuna' (to match the letter ñ we also need tell Perl to match any two characters .{2}). Perl regular expressions are extremely powerfull, we recommend you to take a look at them. As indicated above, add the new names to color_ordering.tsv and lat_longs.tsv if necesary.
-You will find that there are many reasons why the names in metadata.tsv do not match those of color_ordering.tsv and lat_longs.tsv. For instance, in metatada.tsv the name 'State of Mexico' is written in English and in color_ordering.tsv is in Spanish: 'Estado de Mexico'. In other occasions the name in one of the files is the full name of the place. This is the case of 'Coahuila de Zaragoza' which is written simply as 'Coahuila' in color_ordering.tsv. In addition, some names are written with accents in metadata.tsv (like 'Yucatán') and without accents in color_ordering.tsv. Finally (and very often), some names are simply missing in color_ordering.tsv, like 'Zapopan' or 'Ciudad Juarez'. In any case, you will have to study each one and decide the best way to fix the problem. 
-#-
+Now we will review the second part of the output of compare_names.pl. Take a look to the case of 'Altamira'. In Mexico there are two cities with the name 'Altamira', one is in the state of 'Nuevo Leon' and the other is in the state of 'Tamaulipas'. Because of this, we will have to change the name of the cities to differentiate one from the other. One possibility is to name the cities as 'Altamira Nuevo Leon' and 'Atlamira Tamaulipas'. Use the file substitute_proposal.tsv as explained before to change these names. In addition, the names of 'Altamira Nuevo Leon' and 'Altamira Tamaulipas' didn't exist in color_ordering.tsv, so we have to add these cities to this file and to lat_longs.tsv.
 
 Once you have finished adding the lacking names to color_ordering.tsv (and to lat_longs.tsv) and identifying all names that need to be substituted in substitute_proposal.tsv (and if necessary adding these new names to color_ordering.tsv and lat_longs.tsv), the run the script:
 
@@ -227,12 +226,59 @@ If there are no more mismatches you should get the following ouptup:
 
 ```
 ------------------------------------------------------------------------
+Part 1
+Are there names in outfile.tsv lacking in color_ordering.tsv?
+
+------------------------------------------------------------------------
+Part 2
+Checking if the same name is repeated in different geographic contexts
+
+Warning! the name 'Aguascalientes' is in more than one geographic context:
+North America / Mexico / 'Aguascalientes'
+North America / Mexico / Aguascalientes / 'Aguascalientes'
+
+Warning! the name 'Baja California' is in more than one geographic context:
+North America / Mexico / 'Baja California'
+North America / Mexico / Chiapas / 'Baja California'
+
+Warning! the name 'Campeche' is in more than one geographic context:
+North America / Mexico / 'Campeche'
+North America / Mexico / Campeche / 'Campeche'
+
+Warning! the name 'Chihuahua' is in more than one geographic context:
+North America / Mexico / 'Chihuahua'
+North America / Mexico / Chihuahua / 'Chihuahua'
+
+Warning! the name 'Durango' is in more than one geographic context:
+North America / Mexico / 'Durango'
+North America / Mexico / Durango / 'Durango'
+
+Warning! the name 'Merida' is in more than one geographic context:
+North America / Mexico / 'Merida'
+North America / Mexico / Yucatan / 'Merida'
+
+Warning! the name 'Puebla' is in more than one geographic context:
+North America / Mexico / 'Puebla'
+North America / Mexico / Puebla / 'Puebla'
+
+Warning! the name 'San Luis Potosi' is in more than one geographic context:
+North America / Mexico / 'San Luis Potosi'
+North America / Mexico / San Luis Potosi / 'San Luis Potosi'
+
+Warning! the name 'Veracruz' is in more than one geographic context:
+North America / Mexico / 'Veracruz'
+North America / Mexico / Veracruz / 'Veracruz'
+
+Warning! the name 'Zacatecas' is in more than one geographic context:
+North America / Mexico / 'Zacatecas'
+North America / Mexico / Zacatecas / 'Zacatecas'
+------------------------------------------------------------------------
 All names in outfile.tsv have a match in color_ordering.tsv
 See https://github.com/luisdelaye/Mexstrain/ for more details.
 ------------------------------------------------------------------------
 ```
 
-Now change the name of outfile.tsv to:
+Note that you got several warnings. But they do not represent errors in outfile.tsv since they correspond to those cities that are named as the states in which they are located. Now change the name of outfile.tsv to:
 
 ```
 $ mv outfile.tsv metadata.e1.tsv
