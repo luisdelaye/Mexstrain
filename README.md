@@ -347,6 +347,12 @@ $ perl sample_genomes_Nextstrain.pl metadata.e2.tsv nextstrain_ncov_gisaid_globa
 $ mv outfile.tsv nextstrain_ncov_global_metadata.sampled.tsv
 ```
 
+The script will print the same statistics as the previous one. Then, rename the output:
+
+```
+$ mv outfile.tsv nextstrain_ncov_global_metadata.sampled.tsv
+```
+
 ### Create the sequence and metadata files for Nextstrain analysis
 
 Now we are going to join selected genome sequences (and their associated metadata) from GISAID and Nextstrain into a file (each) for Nextstrain analysis. This will take a while...
