@@ -340,7 +340,7 @@ The script will print to the screen: number of genomes per collection date; numb
 $ mv outfile.tsv gisaid_hcov-19_2022_##_##.e1.sampled.tsv
 ```
 
-Now, you may whant to sample the genomes downloaded from Nextstrain global analysis. We can us the same seed to generate random numbers and select at most 5 sequences of each Pangolin lineage per month:
+Now, you may whant to sample the genomes downloaded from [Nextstrain global analysis](https://nextstrain.org/ncov/gisaid/global). We can us the same seed to generate random numbers and select at most 5 sequences from each Pangolin lineage per month:
 
 ```
 $ perl selectgenomesN.pl metadata.e2.tsv nextstrain_ncov_gisaid_global_acknowledgements.tsv 31416 5
