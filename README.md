@@ -319,23 +319,23 @@ $ mv outfile.tsv metadata.e2.tsv
 
 ### Sample sequences for Nextstrain analysis
 
-The following script will sample N number of sequences of each [Pangolin](https://cov-lineages.org/pangolin.html) lineage per month. The script samples all different available lineages per month. Also, the script uses a random number generator to select which genomes to sample. If you use the same number in subsequent runs, you will get the same set of sequences. In our example, we will select at most 5 sequences of each Pangolin lineage per month and use the number 31416 to seed the random number generator.
+Nextstrain can handle and display approximately 5000 sequences. But you may have much more. For instance, at the date of writing there are about 15000 sequences from Mexico. Therefore, you need to sample a set of sequences to make the Nextstrain analysis. Here we provide a script to sample at most N genomes from each [Pangolin](https://cov-lineages.org/pangolin.html) lineage per month. Take into account that the script will sample all different available lineages per month. Notice also that this script uses a random number generator to select which genomes to sample. If you use the same number in subsequent runs, you will get the same set of sequences. In our example, we will select at most 5 sequences from each Pangolin lineage per month and use the number 2718 to seed the random number generator.
 
 Before running the script, we have to delete hidden new line characters:
 
 ```
-$ perl replacemc.pl gisaid_hcov-19_2021_##_##_##.tsv 
-$ mv gisaid_hcov-19_2021_##_##_##.tsv.e1 gisaid_hcov-19_2021_##_##_##.e1.tsv 
+$ perl replacemc.pl gisaid_hcov-19_2022_##_##.tsv 
+$ mv gisaid_hcov-19_2022_##_##.tsv.e1 gisaid_hcov-19_2022_##_##.e1.tsv 
 ```
 
 Now, run the script to sample the sequences:
 
 ```
-$ perl selectgenomes.pl gisaid_hcov-19_2021_##_##_##.e1.tsv 31416 5
-$ mv outfile.tsv gisaid_hcov-19_2021_##_##_##.e1.selected.tsv
+$ perl sample_genomes.pl gisaid_hcov-19_2022_##_##.e1.tsv 2718 5
+$ mv outfile.tsv gisaid_hcov-19_2022_##_##.e1.sampled.tsv
 ```
 
-The script will print to the screen: collection dates, Pangolin lineages, Clades and the EPI ISL number of selected genomes.
+The script will print to the screen: collection dates, Pangolin lineages, Clades and the EPI_ISL number of selected genomes.
 
 Now, you may whant to sample the genomes downloaded from Nextstrain global analysis. We can us the same seed to generate random numbers and select at most 5 sequences of each Pangolin lineage per month:
 
