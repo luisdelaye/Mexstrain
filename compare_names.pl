@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # This script check whether the names of geographic localities in metadata.tsv
-# are the same as those in color_ordering.tsv
+# are the same as those in color_ordering.tsv.
 
 # use
 # perl compare_names.pl color_ordering.tsv metadata.tsv Country
