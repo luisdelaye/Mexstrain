@@ -211,7 +211,7 @@ Now we will review the second part of the output of compare_names.pl. Take a loo
 Once you have finished adding the lacking names to color_ordering.tsv (and to lat_longs.tsv) and identifying all names that need to be substituted in substitute_proposal.tsv (and if necessary adding these new names to color_ordering.tsv and lat_longs.tsv), the run the script:
 
 ```
-$ perl substitute_names.pl color_ordering.tsv metadata.tsv substitute_proposal.tsv
+$ perl substitute_names.pl metadata.tsv substitute_proposal.tsv
 ```
 
 As mentioned above, this script will output the file: outfile.tsv. This file is an exact copy of metadata.tsv except for those names that were substituted.
