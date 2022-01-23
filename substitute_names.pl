@@ -5,7 +5,7 @@
 # color_ordering.tsv for Nextstrain analysis.
 
 # use
-# perl substitute_names.pl color_ordering.tsv metadata.tsv substitute_proposal.tsv
+# perl substitute_names.pl metadata.tsv substitute_proposal.tsv
 # out:
 # outfile.tsv
 
@@ -51,9 +51,8 @@ use strict;
 #-------------------------------------------------------------------------------
 # Global variables
 
-my $fileCo   = $ARGV[0]; # color_ordering.tsv file
-my $fileMe   = $ARGV[1]; # metadata.tsv file
-my $subsfile = $ARGV[2]; # the name of the file with the names to substitute
+my $fileMe   = $ARGV[0]; # metadata.tsv file
+my $subsfile = $ARGV[1]; # the name of the file with the names to substitute
 
 my %hashCo;              # category of geographic localities
 my %country;             # Country of reference
@@ -78,19 +77,6 @@ if (-e 'outfile.tsv'){
 	}
 }
 
-#-------------------------------------------------------------------------------
-# Gather information from the color_ordering.tsv file
-open (MIA, "$fileCo") or die ("Can't open $fileCo\n");
-while (my $linea = <MIA>){
-	chomp ($linea);
-  if ($linea !~ /#/ && $linea =~ /\w/){
-    my @a = split (/\t/, $linea);
-    $a[1] =~ tr/A-Z/a-z/;
-    $hashCo{$a[1]} = $a[0] if ($a[0] ne 'recency');
-  }
-}
-close (MIA);
-my @geo = sort keys (%hashCo);
 #-------------------------------------------------------------------------------
 # Gather information from the substitution_proposal.tsv file
 if (-e $subsfile){
@@ -123,6 +109,7 @@ if (-e $subsfile){
 	die;
 }
 my @subs = sort keys (%hashSub);
+
 #-------------------------------------------------------------------------------
 # Gather information from the metadata.tsv file
 print ("Analysing: $fileMe\n");
