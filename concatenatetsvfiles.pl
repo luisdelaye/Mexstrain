@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 
-# This script concatenate tsv files downloaded from GISAID
+# This script concatenate tsv files downloaded from GISAID.
 
 # use
 # perl concatenatetsvfiles.pl gisaid_hcov-19_2021_
 # out:
 # outfile.tsv
 
-# See https://github.com/luisdelaye/Mexstrain/ for more details
+# See https://github.com/luisdelaye/Mexstrain/ for more details.
 
 # Author
 # Luis Jose Delaye Arredondo
@@ -31,6 +31,22 @@ my %hash;
 my $n = 0;
 my $header;
 my $ids = 0;
+
+#-------------------------------------------------------------------------------
+# Check if an outfile.tsv file already exists
+
+if (-e 'outfile.tsv'){
+	print ("\n------------------------------------------------------------------------\n");
+	print ("A outfile.tsv file already exists.\n");
+	print ("If you continue with the analysis, its content will be replaced.\n");
+	print ("Do you want to continue? (y/n)\n");
+	my $answer = <STDIN>;
+	if ($answer =~ /n/i){
+		die;
+	} else {
+		system ("rm outfile.tsv\n")
+	}
+}
 
 #-------------------------------------------------------------------------------
 # Concatenate files
@@ -77,5 +93,8 @@ foreach my $f (@files){
   }
 }
 close (ROB);
+print ("\n");
+print ("------------------------------------------------------------------------\n");
 print ("Number of files..: $n\n");
 print ("Number of genomes: $ids\n");
+print ("------------------------------------------------------------------------\n");
