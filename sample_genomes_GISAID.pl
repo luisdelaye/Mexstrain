@@ -3,7 +3,7 @@
 # This script sample genomes for Nextstrain analysis.
 
 # use
-# perl sample_genomes.pl gisaid_hcov-19_2021_##_##.e1.tsv 'seed' 'n'
+# perl sample_genomes_GISAID.pl gisaid_hcov-19_2021_##_##.e1.tsv 'seed' 'n'
 # out:
 # outfile.tsv
 
