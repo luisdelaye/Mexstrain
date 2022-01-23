@@ -298,40 +298,20 @@ $ grep '>' spikeprot####.fasta > spikeprot####.fasta.headers.txt
 Now, run the script format_metadata.pl:
 
 ```
-$ perl format_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt color_ordering.tsv
+$ perl format_metadata.pl metadata.e1.tsv sequences.fasta.headers.txt spikeprot####.fasta.headers.txt
 ```
 
-It is possible that you get the following warning message:
-
-
-```
-Warning! misspelled names:
-Category	(original name)	(misspelled name)
-Location	(Šumavské Hoštice)	(?umavské Hoštice)
-
-There are misspelled names
-You have to open create_metadata.pl and code Perl to fix the problem
-Go to the bottom of the file and where indicated, code:
-
-  } elsif ($newword =~ /misspelled name/){
-    $newword = 'original name';
-
-You may need to use pattern matching to contend with unusual characters
-Press enter to continue
-```
-
-If you get this message, you will have to open the format_metadata.pl file and go to the bottom to find the place where you have to code for the original name. For instance, in the example above you would have to code the following to fix the name:
+You will get the following message:
 
 
 ```
-  } elsif ($newword =~ /^.+umavsk.+ Ho.+tice$/){
-   $newword = 'Šumavské Hoštice';
+------------------------------------------------------------------------
+Number of headers in outfile.tsv: 6912788
+------------------------------------------------------------------------
 ```
 
-Notice that I used pattern matching to match the misspelled name: '?umavské Hoštice'.
-
-If you don't get the warning message, simply rename the outfile.tsv
-
+This output indicates the number of entries in the new metadata file outfile.tsv. Each entry has its corresponding genome sequence in sequences.fasta.
+Next, rename the outfile.tsv:
 
 ```
 $ mv outfile.tsv metadata.e2.tsv 
