@@ -44,7 +44,7 @@ $ mv gisaid_hcov-19_2022_01_11_01.tsv gisaid_hcov-19_2022_01_11_01_Aguascaliente
 Just keep the first part of the filename 'gisaid_hcov-19_2022_' and the extension 'tsv'. Next, you will need to run the script:
 
 ```
-$ perl concatenatetsvfiles.pl gisaid_hcov-19_2022_
+$ perl concatenate_tsv_files.pl gisaid_hcov-19_2022_
 $ mv outfile.tsv gisaid_hcov-19_2022_##_##.tsv
 ```
 
@@ -332,10 +332,13 @@ Now, run the script to sample the sequences:
 
 ```
 $ perl sample_genomes.pl gisaid_hcov-19_2022_##_##.e1.tsv 2718 5
-$ mv outfile.tsv gisaid_hcov-19_2022_##_##.e1.sampled.tsv
 ```
 
-The script will print to the screen: collection dates, Pangolin lineages, Clades and the EPI_ISL number of selected genomes.
+The script will print to the screen: number of genomes per collection date; number of genomes per Pangolin lineage; number of genomes per clade; and will indicate which genomes were sampled per month per lineage. Next, rename the output:
+
+```
+$ mv outfile.tsv gisaid_hcov-19_2022_##_##.e1.sampled.tsv
+```
 
 Now, you may whant to sample the genomes downloaded from Nextstrain global analysis. We can us the same seed to generate random numbers and select at most 5 sequences of each Pangolin lineage per month:
 
