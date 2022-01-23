@@ -48,9 +48,8 @@ my $machy = 0;
 
 if (-e 'substitute_proposal.tsv'){
 	print ("\n------------------------------------------------------------------------\n");
-	print ("A substitute_proposal.tsv file already exists\n");
-	print ("if there are no matching names in $fileMe, its\n");
-	print ("content will be replaced by new contet.\n");
+	print ("A substitute_proposal.tsv file already exists.\n");
+	print ("If there are no matching names in $fileMe, its content will be replaced.\n");
 	print ("Do you want to continue? (y/n)\n");
 	my $answer = <STDIN>;
 	if ($answer =~ /n/i){

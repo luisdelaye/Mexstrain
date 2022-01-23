@@ -63,7 +63,7 @@ my $l = 0;
 my $n = 0;
 
 #-------------------------------------------------------------------------------
-# Check if a outfile.tsv file already exists
+# Check if an outfile.tsv file already exists
 
 if (-e 'outfile.tsv'){
 	print ("\n------------------------------------------------------------------------\n");
