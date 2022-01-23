@@ -62,6 +62,21 @@ my %substitutions;
 my $l = 0;
 my $n = 0;
 
+#-------------------------------------------------------------------------------
+# Check if a substitute_proposal file already exists
+
+if (-e 'outfile.tsv'){
+	print ("\n------------------------------------------------------------------------\n");
+	print ("A outfile.tsv file already exists.\n");
+	print ("If you continue with the analysis, its content will be replaced.\n");
+	print ("Do you want to continue? (y/n)\n");
+	my $answer = <STDIN>;
+	if ($answer =~ /n/i){
+		die;
+	} else {
+		system ("rm outfile.tsv\n")
+	}
+}
 
 #-------------------------------------------------------------------------------
 # Gather information from the color_ordering.tsv file
