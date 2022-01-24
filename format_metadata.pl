@@ -127,7 +127,7 @@ while (my $linea = <MIA>){
 			$m++;
 		}
   } else {
-    print ROB ("strain\tgisaid_epi_isl\tdate\tsubmission_date\tregion\tcountry\tdivision\tlocation\tregion_exposure\tcountry_exposure\tdivision_exposure\tlength\thost\tage\tsex\tclade\tpango_lineage\tpango_version\toriginating_lab\tsubmitting_lab\tsubmitter\n");
+    print ROB ("strain\tgisaid_epi_isl\tdate\tdate_submitted\tregion\tcountry\tdivision\tlocation\tregion_exposure\tcountry_exposure\tdivision_exposure\tlength\thost\tage\tsex\tclade\tpango_lineage\tpango_version\toriginating_lab\tsubmitting_lab\tsubmitter\n");
   }
 }
 close (ROB);
