@@ -385,7 +385,7 @@ Now, a final tweak to the metadata and sequences file:
 
 ```
 $ perl substitute_outgroup_name.pl metadata.sampled.tsv
-$ mv outfile.tsv metadata.sampled.tsv
+$ mv outfile metadata.sampled.tsv
 $ perl substitute_outgroup_name.pl sequences.sampled.fasta
 $ mv outfile sequences.sampled.fasta
 ```
