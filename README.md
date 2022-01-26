@@ -513,10 +513,11 @@ Note: single quotes "'" in the name of the sequences are transformed to undersco
 </p>
 Figure 4. Microreact visualization of sequences.
 
+
 If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico) altogether with a phylogenetic tree, follow the next instructions. You will need to run the script:
 
 ```
-$ perl exstractsecs.pl outfile_subset.tsv alignment.fasta
+$ perl exstract_secs.pl outfile_subset.tsv alignment.fasta
 ```
 
 This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.selected.tsv. Rename this file to outfile_subset.fasta. Then run [iqtree](http://www.iqtree.org) to infer a phylogenetic tree:
