@@ -517,16 +517,17 @@ Figure 4. Microreact visualization of sequences.
 If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico) altogether with a phylogenetic tree, follow the next instructions. You will need to run the script:
 
 ```
-$ perl exstract_secs.pl outfile_subset.tsv alignment.fasta
+$ perl exstract_secs.pl metadata.sampled.mrMexico.tsv aligned.fasta
+$ mv outfile metadata.sampled.mrMexico.fasta
 ```
 
-This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.selected.tsv. Rename this file to outfile_subset.fasta. Then run [iqtree](http://www.iqtree.org) to infer a phylogenetic tree:
+This will create a file named outfile that contains the sequences whose ids are found in outfile_subset.tsv. This is, all the sequences from Mexico originaly found in metadata.sampled.tsv. Rename this file to metadata.sampled.mrMexico.fasta. Then run [iqtree](http://www.iqtree.org) to infer a phylogenetic tree:
 
 ```
-$ iqtree -s outfile_subset.fasta -m GTR+I+G
+$ iqtree -s metadata.sampled.mrMexico.fasta -m GTR+I+G
 ```
 
-Now add the extension nwk to the phylogeny file and upload the phylogeny and the outfile_subset.tsv files to [Microreact](https://microreact.org/showcase).
+Now add the extension nwk to the phylogeny file and upload the phylogeny and the metadata.sampled.mrMexico.tsv files to [Microreact](https://microreact.org/showcase).
 
 ### Display all sequences from a country in Microreact
 
