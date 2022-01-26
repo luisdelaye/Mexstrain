@@ -388,7 +388,7 @@ $ mv outfile.fasta sequences.sampled.fasta
 
 Note that you have to download the sequences EPI_ISL_402125 and EPI_ISL_406798 from [GISAID](https://www.gisaid.org) before concatenating the fasta files. Make sure that the sequence EPI_ISL_402125 contains the FASTA header: >hCoV-19/Wuhan/Hu-1/2019|2019-12-31|2020-01-12; and the sequence EPI_ISL_406798 contains the FASTA header >hCoV-19/Wuhan/WH01/2019|2019-12-26|2020-01-30.
 
-Now, a final tweak to the metadata and sequences file:
+Now, a final tweaks to the metadata and sequences file:
 
 ```
 $ perl substitute_outgroup_name.pl metadata.sampled.tsv
@@ -397,12 +397,30 @@ $ perl substitute_outgroup_name.pl sequences.sampled.fasta
 $ mv outfile sequences.sampled.fasta
 ```
 
-The above step is required because Nextstrain requires the outgroup sequences to have the names: Wuhan/WH01/2019 and Wuhan/Hu-1/2019. With this, you have the sequence and the metadata files required to run a Nextstrain analysis:
+The above step is required because Nextstrain requires the outgroup sequences to have the names: Wuhan/WH01/2019 and Wuhan/Hu-1/2019. 
+
+Now, check whether there are hiden characters in the sequence file:
+
+```
+$ perl replace_mc.pl sequences.sampled.fasta
+$ mv sequences.sampled.fasta.e1 sequences.sampled.fasta
+```
+
+With this, you have the sequence and the metadata files required to run a Nextstrain analysis:
 
 ```
 metadata.sampled.tsv
 sequences.sampled.fasta
 ```
+
+Copy these files to the proper location within your Nextstrain local installation (in my case this is):
+
+```
+$ cp metadata.sampled.tsv /Users/jose/Software/ncov/data/
+$ cp sequences.sampled.fasta /Users/jose/Software/ncov/data/
+```
+
+Configure the files builds.yaml, config.yaml, my_auspice_config.json, my_description.md that live within ncov/my_profiles/yourprofileforthisrun/.
 
 But we haven't finished yet. You may want to tell Nextstrain to include in the analysis all the sequences you sampled from the chosen country (in this case Mexico) you which to focus on. For this, you can use the following script:
 
@@ -414,6 +432,10 @@ Now you simply add the names of the sequences in the file add_to_the_include_fil
 
 Now, run Nextstrain!
 
+```
+$ conda activate nextstrain
+$ snakemake --cores 16 --profile ./my_profiles/yourprofileforthisrun/ -p
+```
 
 ### Optional: add columns to the metadata file
 
@@ -423,8 +445,9 @@ If you like, yo can add special columns to the metadata file. Just run:
 #$ perl add_columns_to_metadata.pl metadata.selected.tsv
 #$ mv outfile.tsv metadata.selected.tsv
 ```
+Of course, you have to do the above step just before copying the metadata file to: /Users/jose/Software/ncov/data/.
 
-By default, the script will add a column named VOC where the [Variants of Concern](https://cov-lineages.org/lineage_list.html) will be indicated (Alpha, Beta, Gamma, Delta and Omicron). You can modify the behavior of the script by opening with a text editor and changing the following section:
+By default, the script will add a column named VOC where the [Variants of Concern](https://cov-lineages.org/lineage_list.html) will be indicated (Alpha, Beta, Gamma, Delta and Omicron). You can modify the behavior of the script by opening with a text editor (like [ATOM](https://atom.io)) and changing the following section:
 
 ```
 				#-----------------------------------------------------------------------
