@@ -509,7 +509,7 @@ Now you can go to [Microreact](https://microreact.org/showcase) and upload the m
 Note: single quotes "'" in the name of the sequences are transformed to underscores _ in the names of the sequences in the tree. For instance, the sequence name in metadata: Lu'an/5073Y is transformed to Lu_an/5073Y in tree_raw.nwk. If you have sequence names with single quotes, simply open the outfile.tsv with a text editor and remplace the single quote by an underscore. In the example above, just open the outfile.tsv file with a text editor and rename the sequence Lu'an/5073Y to Lu_an/5073Y. Otherwise Microreact will not work.
 
 <p align="center">
-  <img width="1415" height="743" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-Mr-1.png">
+  <img width="707.5" height="371.5" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-Mr-1.png">
 </p>
 Figure 4. Microreact visualization of sequences.
 
