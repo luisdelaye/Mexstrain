@@ -534,9 +534,10 @@ Now add the extension nwk to the phylogeny file and upload the phylogeny and the
 You may want to display all sequences from a country in Microreact. For this, you will need the metadata.e2.tsv file and the following script:
 
 ```
-$ perl createmicroreactall.pl lat_longs.e1.tsv metadata.e2.tsv Mexico
+$ perl create_microreact_all.pl lat_longs.e1.tsv metadata.e2.tsv Mexico
+$ mv outfile_all.tsv metadata.mrMexico.tsv
 ```
 
-The above script will create the file outfile_all.tsv. Simply upload this file to [Microreact](https://microreact.org/showcase). Because the number of genomes is usually very high, it is not practical to do a phylogenetic analysis.
+The above script will create the file outfile_all.tsv. Simply upload this (metadata.mrMexico.tsv) file to [Microreact](https://microreact.org/showcase). Because the number of genomes is usually very high, it is not practical to do a phylogenetic analysis.
 
 
