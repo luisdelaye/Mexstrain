@@ -380,9 +380,10 @@ $ grep 'EPI_ISL_406798' metadata.sampled.tsv
 If they are not, includ them with the following script:
 
 ```
-$ perl add_outgroup.pl metadata.selected.tsv
-$ mv outfile.tsv metadata.sampled.e1.tsv
-$ cat sequences.sampled.fasta EPI_ISL_402125.fasta EPI_ISL_406798.fasta > sequences.sampled.e1.fasta
+$ perl add_outgroup.pl metadata.sampled.tsv
+$ mv outfile.tsv metadata.sampled.tsv
+$ cat sequences.sampled.fasta EPI_ISL_402125.fasta EPI_ISL_406798.fasta > outfile.fasta
+$ mv outfile.fasta sequences.sampled.fasta
 ```
 
 Note that you have to download the sequences EPI_ISL_402125 and EPI_ISL_406798 from [GISAID](https://www.gisaid.org) before concatenating the fasta files. Make sure that the sequence EPI_ISL_402125 contains the header: hCoV-19/Wuhan/Hu-1/2019|2019-12-31|2020-01-12; and the sequence EPI_ISL_406798 contains the header hCoV-19/Wuhan/WH01/2019|2019-12-26|2020-01-30.
