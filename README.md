@@ -420,18 +420,36 @@ Now, run Nextstrain!
 If you like, yo can add special columns to the metadata file. Just run:
 
 ```
-#$ perl addcolumns.pl metadata.selected.tsv
+#$ perl add_columns_to_metadata.pl metadata.selected.tsv
 #$ mv outfile.tsv metadata.selected.tsv
 ```
 
-Because the script addcolumns.pl adds the columns VOI and VOC to the metadata file, you will need to modify the my_auspice_config.json file. You can find this file in one of the folders of: ncov/my_profiles/. Open the file and add where properly:
+By default, the script will add a column named VOC where the [Variants of Concern](https://cov-lineages.org/lineage_list.html) will be indicated (Alpha, Beta, Gamma, Delta and Omicron). You can modify the behavior of the script by opening with a text editor and changing the following section:
 
 ```
-    {
-      "key": "VOI",
-      "title": "Variants of interest",
-      "type": "categorical"
-    },
+				#-----------------------------------------------------------------------
+				# Here you can modify the options to add the column you want
+				# VOC
+				if ($a[15] eq 'B.1.1.7'){
+					print ROB ("$a[$i]\tAlpha\n");
+				} elsif ($a[15] eq 'B.1.351'){
+					print ROB ("$a[$i]\tBeta\n");
+				} elsif ($a[15] eq 'P.1'){
+					print ROB ("$a[$i]\tGamma\n");
+				} elsif ($a[15] eq 'B.1.617.2'){
+					print ROB ("$a[$i]\tDelta\n");
+				} elsif ($a[15] eq 'B.1.1.529' || $a[15] eq 'BA.1' || $a[15] eq 'BA.1.1'
+				 			|| $a[15] eq 'BA.2' || $a[15] eq 'BA.3'){
+					print ROB ("$a[$i]\tOmicron\n");
+				} else {
+					print ROB ("$a[$i]\tother\n");
+				}
+				#-----------------------------------------------------------------------
+```
+
+Because the script add_columns_to_metadata.pl adds the column VOC to the metadata file, you will need to modify the my_auspice_config.json file. You can find this file in one of the folders of: ncov/my_profiles/. Open the file and add where properly:
+
+```
     {
       "key": "VOC",
       "title": "Variants of concern",
