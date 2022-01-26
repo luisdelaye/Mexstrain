@@ -483,7 +483,7 @@ Because the script add_columns_to_metadata.pl adds the column VOC to the metadat
 ## Microreact
 -----
 
-If you would like to visualize the above sequences in [Microreact](https://microreact.org/showcase) follow these instructions. First, you will need the metadata file created above (sequences.selected.tsv) and two files from Nextstrain (lat_longs.tsv, aligned.fasta). Copy the ncov/defaults/lat_longs.tsv file to your working directory and change its name to lat_longs.e1.tsv. Open this file with a text editor and at the bottom of it, add the following:
+If you would like to visualize the above sequences in [Microreact](https://microreact.org/showcase) follow these instructions. First, you will need the metadata file created above (metadata.sampled.tsv) and three files from Nextstrain (lat_longs.tsv, aligned.fasta, tree_raw.nwk). Copy the ncov/defaults/lat_longs.tsv file to your working directory and change its name to lat_longs.e1.tsv. Open this file with a text editor and at the bottom of it, add the following:
 
 ```
 region	Africa	4.070194	21.824559
@@ -497,14 +497,23 @@ region	South America	-13.083583	-58.470721
 Now, you have to localize were is the aligned.fasta file in your computer. The aligned.fasta file is the result of running Nextstrain on a given set of sequences. It contains tha alignment of the sequences that will be displyed in auspice. For instance, in the example above, the file in my computer is in: ncov/results/global-mex/aligned.fasta. You can copy this file to your working directory. Once you localized this file, run the following script:
 
 ```
-$ perl createmicroreact.pl lat_longs.e1.tsv aligned.fasta metadata.selected.tsv Mexico
+$ perl create_microreact.pl lat_longs.e1.tsv aligned.fasta metadata.sampled.tsv Mexico
+$ mv outfile.tsv metadata.sampled.mr.tsv 
+$ mv outfile_subset.tsv metadata.sampled.mrMexico.tsv
 ```
 
-The above script will create three files: outfile.tsv, outfile_subset.tsv, prunetree.py. The first file contains the table required by Microreact with all the sequences found in metadata.selected.tsv. The second file contains the table required by Microreact only with the sequences from the country of selection (in this case Mexico). The third file is a python program that uses [ete3](http://etetoolkit.org) to prune a tree to leave only sequences from Mexico. You can find the tree to prune in the same directory as the aligned.fasta file under the name of tree_raw.nwk. At this point, we are not going to prune the tree.
+The above script will create three files: outfile.tsv, outfile_subset.tsv. The first file contains the table required by Microreact with all the sequences found in metadata.sampled.tsv. The second file contains the table required by Microreact only with the sequences from the country of selection (in this case Mexico). 
 
-Now you can go to [Microreact](https://microreact.org/showcase) and upload the outfile.tsv and the tree_raw.nwk to visualize your data. Note: in our example, there is a sequence in outfile.tsv with the name: Lu'an/5073Y. The same sequence in the tree_raw.nwk is named as Lu_an/5073Y. Just open the outfile.tsv file with a text editor and rename the sequence Lu'an/5073Y as Lu_an/5073Y. Otherwise Microreact will not work.
+Now you can go to [Microreact](https://microreact.org/showcase) and upload the metadata.sampled.mr.tsv and the tree_raw.nwk to visualize your data. You can find the tree_raw.nwk in /ncov/results/global-mex/. The tree_raw.nwk file contains a phylogeny of all the sequences in aligned.fasta.
 
-If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico), follow the next instructions. You will need to run the script:
+Note: single quotes "'" in the name of the sequences are transformed to underscores _ in the names of the sequences in the tree. For instance, the sequence name in metadata: Lu'an/5073Y is transformed to Lu_an/5073Y in tree_raw.nwk. If you have sequence names with single quotes, simply open the outfile.tsv with a text editor and remplace the single quote by an underscore. In the example above, just open the outfile.tsv file with a text editor and rename the sequence Lu'an/5073Y to Lu_an/5073Y. Otherwise Microreact will not work.
+
+<p align="center">
+  <img width="1415" height="743" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-Mr-1.png">
+</p>
+Figure 4. Microreact visualization of sequences.
+
+If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico) altogether with a phylogenetic tree, follow the next instructions. You will need to run the script:
 
 ```
 $ perl exstractsecs.pl outfile_subset.tsv alignment.fasta
