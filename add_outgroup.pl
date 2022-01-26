@@ -24,7 +24,7 @@ use strict;
 #-------------------------------------------------------------------------------
 # Global variables
 
-my $file   = $ARGV[0]; # metadata.selected.tsv file
+my $file   = $ARGV[0]; # metadata.sampled.tsv file
 
 #-------------------------------------------------------------------------------
 # Check if an outfile.tsv file already exists
