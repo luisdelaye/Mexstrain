@@ -14,25 +14,32 @@ The scripts in this repository facilitate the manipulation of data (metadata and
 </p>
 Figure 1. Mexstrain allows to combine information from Nextstrain and GISAID to make a phylodynamic analysis focused on a single country.
 
+Next, we show a roadmap of how to use the scripts to download data from Nextstrain Global Analysis and GISAID, curate the names of metadata files downloaded from GISAID, sample sequences from Nextstrain and GISAID and finally run a local Nextstrain analysis (Figure 2). All the above, to study the evolution of SARS-CoV-2 sequences in a specified country.
+
+<p align="center">
+  <img width="720" height="1382" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-roadmap.jpeg">
+</p>
+Figure 2. Roadmap to make a Nextstrain analysis on a specified country.
+
 
 ### Collect data
 
 First collect the data. Go to the latest global analysis provided by [Nextstrain](https://nextstrain.org/ncov/global), scroll to the bottom of the page, select 'DOWNLOAD DATA' and then 'ACKNOWLEDGEMENTS (TSV)'. You will get a file named nextstrain_ncov_gisaid_global_acknowledgements.tsv. 
 
-Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 2 you can see where to find these files in GISAID. Don't forget to decompress these files.
+Next, go to [GISAID](https://www.gisaid.org) and download all FASTA sequences (sequences.fasta) and asociated metadata (metadata.tsv). You will find these files in 'Downloads -> Downoads packages'. Also download Spike protein sequences in FASTA format (spikeprot####.fasta). You can find these sequences in 'Downloads -> Alignment and proteins'. In Figure 3 you can see where to find these files in GISAID. Don't forget to decompress these files.
 
 <p align="center">
   <img width="735.75" height="607.5" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-2-Mexstrain.png">
 </p>
-<p style='text-align: right;'> Figure 2. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID. </p>
+<p style='text-align: right;'> Figure 3. Location of the files sequence.fasta, metadata.tsv and spikeprot####.fasta in GISAID. </p>
 
 
-Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metadata' associated to the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2022\_##\_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 3). 
+Also in [GISAID](https://www.gisaid.org), download all the 'Patient status metadata' associated to the genome sequences from the country (or any other geographical region) on which you would like to focus your Nextstrain analysis. In this case, we will download the metadata from all complete and high coverage sequences from Mexico (gisaid_hcov-19_2022\_##\_##.tsv). You can find this information in 'Search -> Location -> North America -> Mexico' and by clicking in the boxes 'complete' and 'high coverage' and when asked, download the 'Patient status metadata' (Figure 4). 
 
 <p align="center">
   <img width="736.5" height="596.25" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-3-Mexstrain.png">
 </p>
-<p style='text-align: right;'> Figure 3. Download all the metadata asociated to the country on which you would like to focus your Nextstrain analysis. </p>
+<p style='text-align: right;'> Figure 4. Download all the metadata asociated to the country on which you would like to focus your Nextstrain analysis. </p>
 
 
 Because you can download a maximum of 10,000 records each time, you may need to download several files, one for each state/division. In the case of Mexico, we need to download one file for each one of the states (Aguascalientes, Baja California, Baja California Sur, etc.) If you like, you can add the name of the state to each of the files (avoid spaces or accents in the name of the files), for example:
@@ -504,14 +511,14 @@ $ mv outfile_subset.tsv metadata.sampled.mrMexico.tsv
 
 The above script will create three files: outfile.tsv, outfile_subset.tsv. The first file contains the table required by Microreact with all the sequences found in metadata.sampled.tsv. The second file contains the table required by Microreact only with the sequences from the country of selection (in this case Mexico). 
 
-Now you can go to [Microreact](https://microreact.org/showcase) and upload the metadata.sampled.mr.tsv and the tree_raw.nwk to visualize your data. You can find the tree_raw.nwk in /ncov/results/global-mex/. The tree_raw.nwk file contains a phylogeny of all the sequences in aligned.fasta.
+Now you can go to [Microreact](https://microreact.org/showcase) and upload the metadata.sampled.mr.tsv and the tree_raw.nwk to visualize your data (Figure 5). You can find the tree_raw.nwk in /ncov/results/global-mex/. The tree_raw.nwk file contains a phylogeny of all the sequences in aligned.fasta.
 
 Note: single quotes "'" in the name of the sequences are transformed to underscores _ in the names of the sequences in the tree. For instance, the sequence name in metadata: Lu'an/5073Y is transformed to Lu_an/5073Y in tree_raw.nwk. If you have sequence names with single quotes, simply open the outfile.tsv with a text editor and remplace the single quote by an underscore. In the example above, just open the outfile.tsv file with a text editor and rename the sequence Lu'an/5073Y to Lu_an/5073Y. Otherwise Microreact will not work.
 
 <p align="center">
   <img width="707.5" height="371.5" src="https://github.com/luisdelaye/Mexstrain/blob/main/Figure-Mr-1.png">
 </p>
-Figure 4. Microreact visualization of sequences.
+Figure 5. Microreact visualization of sequences.
 
 
 If you would like to visualize in [Microreact](https://microreact.org/showcase) only those sequences from the selected country (Mexico) altogether with a phylogenetic tree, follow the next instructions. You will need to run the script:
