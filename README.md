@@ -14,6 +14,7 @@ The scripts in this repository facilitate the manipulation of data (metadata and
 </p>
 Figure 1. Mexstrain allows to combine information from Nextstrain and GISAID to make a phylodynamic analysis focused on a single country.
 
+
 Next, we show a roadmap of how to use the scripts to download data from Nextstrain Global Analysis and GISAID, curate the names of metadata files downloaded from GISAID, sample sequences from Nextstrain and GISAID and finally run a local Nextstrain analysis (Figure 2). All the above, to study the evolution of SARS-CoV-2 sequences in a specified country.
 
 <p align="center">
