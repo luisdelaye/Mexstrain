@@ -27,6 +27,8 @@ my $file1   = $ARGV[0]; # lat_longs.tsv
 my $file2   = $ARGV[1]; # metadata.sampled.tsv
 my $Country = $ARGV[2]; # Country of selection
 
+$Country =~ s/_/\s/g;
+
 my $l = 0;
 
 my %seq;
