@@ -88,7 +88,7 @@ Therefore, the first thing to do is to check whether the names of the geographic
 $ perl compare_names.pl color_ordering.tsv metadata.tsv Mexico
 ```
 
-This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen (Part 1 of the output). This script will also check whether the same name is repeated whithin different geographic contexts (Part 2). We will see later that this may not be an error by itself. In our example data, the first time you run the compare_names.pl script you will get the following output:
+This script will check if the names of the geographical localities in metadata.tsv are found in color_ordering.tsv. If a name is not found, it will print a warning message to the screen (Part 1 of the output). This script will also check whether the same name is repeated whithin different geographic contexts (Part 2). We will see later that this may not be an error by itself. Note that if you would analyze the sequences from a country whose name contain spaces (like 'Costa Rica') you can replace spaces with underscores (i.e. Costa_Rica). In our example data, the first time you run the compare_names.pl script you will get the following output:
 
 ```
 ------------------------------------------------------------------------
