@@ -28,6 +28,8 @@ my $file2   = $ARGV[1]; # aligned.fasta
 my $file3   = $ARGV[2]; # metadata.sampled.tsv
 my $Country = $ARGV[3]; # Country of selection
 
+$Country =~ s/_/\s/g;
+
 my $l = 0;
 
 my %seq;
