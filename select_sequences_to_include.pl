@@ -24,6 +24,8 @@ use strict;
 my $file = $ARGV[0];
 my $country = $ARGV[1];
 
+$country =~ s/_/\s/g;
+
 #-------------------------------------------------------------------------------
 # Extract the names of the sequences
 
