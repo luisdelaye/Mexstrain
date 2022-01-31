@@ -469,7 +469,7 @@ By default, the script will add a column named VOC where the [Variants of Concer
 					print ROB ("$a[$i]\tBeta\n");
 				} elsif ($a[15] eq 'P.1'){
 					print ROB ("$a[$i]\tGamma\n");
-				} elsif ($a[15] eq 'B.1.617.2'){
+				} elsif ($a[15] eq 'B.1.617.2' || $a[15] =~ /^AY\.[\d\.]+$/){
 					print ROB ("$a[$i]\tDelta\n");
 				} elsif ($a[15] eq 'B.1.1.529' || $a[15] eq 'BA.1' || $a[15] eq 'BA.1.1'
 				 			|| $a[15] eq 'BA.2' || $a[15] eq 'BA.3'){
