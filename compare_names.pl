@@ -32,6 +32,8 @@ my $fileCo   = $ARGV[0]; # color_ordering.tsv file
 my $fileMe   = $ARGV[1]; # metadata.tsv file
 my $country  = $ARGV[2]; # the name of the country
 
+$country =~ s/_/\s/g;
+
 my %hashCo;              # category of geographic localities
 my %country;             # Country of reference
 my $hashA = {};
