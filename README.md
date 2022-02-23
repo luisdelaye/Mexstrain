@@ -1,7 +1,7 @@
 # Mexstrain
 -----------
 
-# We are updating the scripts, please do not use them until this message disappears!
+# beta.1.0 version
 
 Perl scripts to manipulate data derived from GISAID and Nextstrain.
 
