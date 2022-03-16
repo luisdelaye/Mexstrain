@@ -86,7 +86,7 @@ close (MIA);
 print ("\n");
 print ("------------------------------------------------------------------------\n");
 if ($n1 == 1 && $n2 == 1){
-	print ("The IDs of both outgroups were cnahged successfully\n");
+	print ("The IDs of both outgroups were changed successfully\n");
 } elsif ($n1 == 1 && $n2 == 0){
 	print ("The following ID was not found in $file:\n");
 	print ("hCoV-19/Wuhan/Hu-1/2019|2019-12-31|2020-01-12\n");
