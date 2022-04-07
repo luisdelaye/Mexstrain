@@ -335,7 +335,7 @@ $ mv outfile.tsv metadata.e2.tsv
 
 ### Sample sequences for Nextstrain analysis
 
-Nextstrain can handle and display approximately 5000 sequences. But you may have much more. For instance, at the date of writing there are about 15000 sequences from Mexico. Therefore, you need to sample a set of sequences to make the Nextstrain analysis. Here we provide a script to sample at most N genomes from each [Pangolin](https://cov-lineages.org/pangolin.html) lineage per month. Take into account that the script will sample all different available lineages per month. Notice also that this script uses a random number generator to select which genomes to sample. If you use the same number in subsequent runs, you will get the same set of sequences. In our example, we will select at most 5 sequences from each Pangolin lineage per month and use the number 2718 to seed the random number generator.
+Nextstrain can handle and display approximately 5000 sequences. But you may have much more. For instance, at the date of writing there are about 15000 sequences from Mexico. Therefore, you need to sample a set of sequences to make the Nextstrain analysis. Here we provide a script to sample a percentage of N genomes from each [Pangolin](https://cov-lineages.org/pangolin.html) lineage per month. This script uses a random number generator to select which genomes to sample. If you use the same number in subsequent runs, you will get the same set of sequences. In our example, we will select to sample 5 per cent of genome sequences from each Pangolin lineage per month and use the number 2718 to seed the random number generator.
 
 Before running the script, we have to delete hidden new line characters:
 
